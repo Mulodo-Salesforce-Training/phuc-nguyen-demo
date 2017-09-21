@@ -1,25 +1,26 @@
 public with sharing class WeatherAPI {
-    String location { get; set; }
-    public WeatherInfo weatherInfo { get; set; }
+    public String location { get; set; }
+    public WeatherInfoDao weatherInfo {
+        get {
+            RestApi rest     = new RestApi();
+            String appId     = 'ea77eec72392d5163c6c06be812dff37';
+            rest.url         = 'https://api.openweathermap.org/data/2.5/weather?q=' + this.location + '&appid=' + appId;
+            rest.method      = 'GET';
+            // Deserialize obtained json res
+            String res       = rest.getResponse();
+            this.weatherInfo = (WeatherInfoDao) JSON.deserialize(res, WeatherInfoDao.class);
+            return this.weatherInfo;
+        }
+        set;
+    }
 
     public WeatherAPI () {
         ID id         = ApexPages.currentPage().getParameters().get('id');
         this.location = [SELECT City__c FROM Candidate__c WHERE id = : id].City__c;
-        getWeather();
-    }
-
-    public void getWeather () {
-        RestApi rest     = new RestApi();
-        String appId     = 'ea77eec72392d5163c6c06be812dff37';
-        rest.url         = 'https://api.openweathermap.org/data/2.5/weather?q=' + this.location + '&appid=' + appId;
-        rest.method      = 'GET';
-        // Deserialize obtained json res
-        String res       = rest.getResponse();
-        this.weatherInfo = (WeatherInfo) JSON.deserialize(res, WeatherAPI.WeatherInfo.class);
     }
 
     // Define object for weather repsone
-    public class WeatherInfo {
+    public class WeatherInfoDao {
         public Coord coord { get; set; }
         public Weather[] weather { get; set; }
         public String base { get; set; }

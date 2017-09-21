@@ -2,7 +2,7 @@ public with sharing class AccountRestClient {
     public AccountRest accountLst {
         get {
             RestApi rest    = new RestApi();
-            rest.url        = 'https://' + URL.getSalesforceBaseUrl().getHost() + '/services/data/v40.0/query/' + '?q=SELECT+name+from+Account+limit+10';
+            rest.url        = 'https://' + URL.getSalesforceBaseUrl().getHost() + '/services/data/v40.0/query/?q=SELECT+name+from+Account+limit+10';
             rest.method     = 'GET';
             // set authorization
             rest.author     = 'Bearer ' + userInfo.getSessionId();
