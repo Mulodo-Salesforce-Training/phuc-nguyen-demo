@@ -15,8 +15,8 @@ public with sharing class CandidatePagination {
                                          LIMIT: listSize
                                          OFFSET: counter];
             return candidates;
-        } catch (QueryException e) {
-            ApexPages.addMessages(e);
+        } catch ( QueryException e ) {
+            ApexPages.addMessages( e );
             return null;
         }
     }
@@ -41,13 +41,13 @@ public with sharing class CandidatePagination {
 
     //user clicked end
     public PageReference toEnd () {
-        counter = totalSize - math.mod(totalSize, listSize);
+        counter = totalSize - math.mod( totalSize, listSize );
         return null;
     }
 
     //this will disable the previous and beginning buttons
     public Boolean getDisablePrevious () {
-        if (counter > 0) {
+        if ( counter > 0 ) {
             return false;
         } else {
             return true;
@@ -56,11 +56,15 @@ public with sharing class CandidatePagination {
 
     //this will disable the next and end buttons
     public Boolean getDisableNext () {
-        if (counter + listSize < totalSize) {
+        if ( counter + listSize < totalSize ) {
             return false;
         } else {
             return true;
         }
+    }
+
+    public Integer getCurrentPage () {
+        return counter / listSize + 1;
     }
 
     //public Integer getTotalSize () {
@@ -79,7 +83,4 @@ public with sharing class CandidatePagination {
     //    }
     //}
 
-    public Integer getCurrentPage () {
-        return counter / listSize + 1;
-    }
 }

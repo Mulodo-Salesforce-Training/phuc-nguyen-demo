@@ -1,17 +1,18 @@
 public with sharing class CandidateRegister {
-    String firstName {set; get;}
+    String firstName { set; get; }
 
-    public CandidateRegister(ApexPages.StandardController stdController) {}
+    public CandidateRegister ( ApexPages.StandardController stdController ) {}
 
     @RemoteAction
-    public static String toRegister(String firstName,
-                                    String lastName,
-                                    String email,
-                                    String phone,
-                                    String street,
-                                    String city,
-                                    String stateProvince) {
+    public static String toRegister (String firstName,
+                                     String lastName,
+                                     String email,
+                                     String phone,
+                                     String street,
+                                     String city,
+                                     String stateProvince ) {
         Candidate__c candidate      = new Candidate__c();
+
         candidate.First_Name__c     = firstName;
         candidate.Last_Name__c      = lastName;
         candidate.Email__c          = email;
@@ -22,7 +23,7 @@ public with sharing class CandidateRegister {
 
         try {
             insert candidate;
-        } catch (Exception ex) {
+        } catch ( Exception ex ) {
             return ex.getMessage();
         }
 

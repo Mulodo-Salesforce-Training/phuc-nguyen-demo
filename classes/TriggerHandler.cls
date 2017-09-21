@@ -12,18 +12,18 @@ public virtual class TriggerHandler {
     private Map<ID, SObject> oldMap { private set; private get; }
     private Integer sizeTrigger { private set; private get; }
 
-    public TriggerHandler (Boolean isExecuting,
-                           Boolean isInsert,
-                           Boolean isUpdate,
-                           Boolean isDelete,
-                           Boolean isBefore,
-                           Boolean isAfter,
-                           Boolean isUndelete,
-                           List<SObject> newList,
-                           Map<ID, SObject> newMap,
-                           List<SObject> oldList,
-                           Map<ID, SObject> oldMap,
-                           Integer sizeTrigger) {
+    public TriggerHandler ( Boolean isExecuting,
+                            Boolean isInsert,
+                            Boolean isUpdate,
+                            Boolean isDelete,
+                            Boolean isBefore,
+                            Boolean isAfter,
+                            Boolean isUndelete,
+                            List<SObject> newList,
+                            Map<ID, SObject> newMap,
+                            List<SObject> oldList,
+                            Map<ID, SObject> oldMap,
+                            Integer sizeTrigger ) {
         this.isExecuting = isExecuting;
         this.isInsert    = isInsert;
         this.isUpdate    = isUpdate;
@@ -40,47 +40,47 @@ public virtual class TriggerHandler {
     }
 
     private void stateMachine () {
-        if (!this.isExecuting) {
+        if ( !this.isExecuting ) {
             return;
         }
 
-        if (this.isBefore) {
-            if (this.isInsert) {
-                execBeforeInsert(this.newList);
-            } else if (this.isUpdate) {
-                execBeforeUpdate(this.newList, this.oldList);
-            } else if (this.isDelete) {
-                execBeforeDelete(this.newList, this.oldList);
-            } else if (this.isUndelete) {
-                execBeforeUndelete(this.newList, this.oldList);
+        if ( this.isBefore ) {
+            if ( this.isInsert ) {
+                execBeforeInsert( this.newList );
+            } else if ( this.isUpdate ) {
+                execBeforeUpdate(this.newList, this.oldList );
+            } else if ( this.isDelete ) {
+                execBeforeDelete( this.newList, this.oldList );
+            } else if ( this.isUndelete ) {
+                execBeforeUndelete( this.newList, this.oldList );
             }
-        } else if (this.isAfter) {
-            if (this.isInsert) {
-                execAfterInsert(this.newList);
-            } else if (this.isUpdate) {
-                execAfterUpdate(this.newList, this.oldList);
-            } else if (this.isDelete) {
-                execAfterDelete(this.newList, this.oldList);
+        } else if ( this.isAfter ) {
+            if ( this.isInsert ) {
+                execAfterInsert( this.newList );
+            } else if ( this.isUpdate ) {
+                execAfterUpdate(this.newList, this.oldList );
+            } else if ( this.isDelete ) {
+                execAfterDelete( this.newList, this.oldList );
             } else if (this.isUndelete) {
-                execAfterUndelete(this.newList, this.oldList);
+                execAfterUndelete( this.newList, this.oldList );
             }
         }
     }
 
-    public virtual void execBeforeInsert (List<SObject> newList) {}
+    public virtual void execBeforeInsert ( List<SObject> newList ) {}
 
-    public virtual void execBeforeUpdate (List<SObject> newList, List<SObject> oldList) {}
+    public virtual void execBeforeUpdate ( List<SObject> newList, List<SObject> oldList ) {}
 
-    public virtual void execBeforeDelete (List<SObject> newList, List<SObject> oldList) {}
+    public virtual void execBeforeDelete ( List<SObject> newList, List<SObject> oldList ) {}
 
-    public virtual void execBeforeUndelete (List<SObject> newList, List<SObject> oldList) {}
+    public virtual void execBeforeUndelete ( List<SObject> newList, List<SObject> oldList ) {}
 
-    public virtual void execAfterInsert (List<SObject> newList) {}
+    public virtual void execAfterInsert ( List<SObject> newList ) {}
 
-    public virtual void execAfterUpdate (List<SObject> newList, List<SObject> oldList) {}
+    public virtual void execAfterUpdate ( List<SObject> newList, List<SObject> oldList ) {}
 
-    public virtual void execAfterDelete (List<SObject> newList, List<SObject> oldList) {}
+    public virtual void execAfterDelete ( List<SObject> newList, List<SObject> oldList ) {}
 
-    public virtual void execAfterUndelete (List<SObject> newList, List<SObject> oldList) {}
+    public virtual void execAfterUndelete ( List<SObject> newList, List<SObject> oldList ) {}
 
 }
