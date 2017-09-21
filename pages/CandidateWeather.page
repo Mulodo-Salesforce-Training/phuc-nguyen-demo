@@ -1,0 +1,47 @@
+<apex:page showHeader="true" standardStylesheets="false" sidebar="true" applyHtmlTag="true" applyBodyTag="false" docType="html-5.0" controller="WeatherAPI" tabStyle="candidate_list__tab">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>Candidates Weather</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Import the Design System style sheet -->
+        <apex:slds />
+    </head>
+
+    <body>
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="text-input-id-1">Longtitude</label>
+            <div class="slds-form-element__control">
+                <input type="text" readonly="" placeholder="Placeholder Text" id="text-input-id-1" class="slds-input" value="{!weatherInfo.coord.lon}" />
+            </div>
+        </div>
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="text-input-id-1">Latitude</label>
+            <div class="slds-form-element__control">
+                <input type="text" readonly="" placeholder="Placeholder Text" id="text-input-id-1" class="slds-input" value="{!weatherInfo.coord.lat}" />
+            </div>
+        </div>
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="text-input-id-1">Weather</label>
+            <div class="slds-form-element__control">
+                <input type="text" readonly="" placeholder="Placeholder Text" id="text-input-id-1" class="slds-input" value="{!weatherInfo.weather[0].main}" />
+            </div>
+        </div>
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="text-input-id-1">Temp</label>
+            <div class="slds-form-element__control">
+                <input type="text" readonly="" placeholder="Placeholder Text" id="text-input-id-1" class="slds-input" value="{!weatherInfo.main.temp}" />
+            </div>
+        </div>
+        <div class="slds-form-element">
+            <label class="slds-form-element__label" for="text-input-id-1">Pressure</label>
+            <div class="slds-form-element__control">
+                <input type="text" readonly="" placeholder="Placeholder Text" id="text-input-id-1" class="slds-input" value="{!weatherInfo.main.pressure}" />
+            </div>
+        </div>
+    </body>
+
+    </html>
+</apex:page>
