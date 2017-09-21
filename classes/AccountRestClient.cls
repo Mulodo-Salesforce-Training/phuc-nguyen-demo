@@ -8,7 +8,7 @@ public with sharing class AccountRestClient {
             rest.author     = 'Bearer ' + userInfo.getSessionId();
             // Deserialize obtained json res
             String res   	= rest.getResponse();
-            this.accountLst = (AccountRest) JSON.deserialize(res, AccountRest.class);
+            this.accountLst = ( AccountRest ) JSON.deserialize( res, AccountRest.class );
             return this.accountLst;
         }
         set;
@@ -16,9 +16,9 @@ public with sharing class AccountRestClient {
 
     // Inner class to parse Account json info
     public class AccountRest {
-        public AccountRecords[] records {get; set;}
+        public AccountRecords[] records { get; set; }
     }
     class AccountRecords {
-        public String Name {get; set;}
+        public String Name { get; set; }
     }
 }

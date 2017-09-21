@@ -4,13 +4,13 @@ public with sharing class CandidateRegister {
     public CandidateRegister ( ApexPages.StandardController stdController ) {}
 
     @RemoteAction
-    public static String toRegister (String firstName,
-                                     String lastName,
-                                     String email,
-                                     String phone,
-                                     String street,
-                                     String city,
-                                     String stateProvince ) {
+    public static String toRegister ( String firstName,
+                                      String lastName,
+                                      String email,
+                                      String phone,
+                                      String street,
+                                      String city,
+                                      String stateProvince ) {
         Candidate__c candidate      = new Candidate__c();
 
         candidate.First_Name__c     = firstName;
