@@ -2,10 +2,15 @@ public with sharing class CandidateWeatherByLocation {
     String location;
     public WeatherInfoDao weatherInfo {
         get {
-            Utils utils     = new Utils();
+            Utils utils          = new Utils();
 
-            String appId    = 'ea77eec72392d5163c6c06be812dff37';
-            String restUrl  = 'https://api.openweathermap.org/data/2.5/weather?q=' + this.location + '&appid=' + appId;
+            String format        = 'https://api.openweathermap.org/data/2.5/weather?q={0}&appid={1}';
+            List<String> filters = new String[]{
+                location,
+                'ea77eec72392d5163c6c06be812dff37'
+            };
+            String restUrl = String.format( format, filters );
+            System.debug(restUrl);
             String method   = 'GET';
             // Deserialize obtained json res
             String res      = utils.getRestfulWSNoAuthor( restUrl, method );
