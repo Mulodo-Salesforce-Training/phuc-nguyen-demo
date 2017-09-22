@@ -87,7 +87,7 @@
                     </div>
                 </div>
                 <div class="slds-form-element">
-                    <button class="slds-button" onclick="getRemoteAccount();">Button</button>
+                    <button class="slds-button slds-button_neutral" onclick="getRemoteAccount();">Resister New</button>
                 </div>
             </div>
         </div>
@@ -107,7 +107,9 @@
                     function(result, event) {
                         console.log(result);
                         if (event.status) {
-
+                            alert('Register Successful');
+                        } else {
+                            alert('Register not successful yet');
                         }
                     }, {
                         escape: true
