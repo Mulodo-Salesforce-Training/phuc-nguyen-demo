@@ -15,7 +15,7 @@
         <div class="slds-scope">
             <div class="slds-align_absolute-center slds-text-heading_large" style="color: #5ADBFF;">Candidates List Page
             </div>
-            <apex:pageBlock>
+            <apex:pageBlock >
                 <apex:outputPanel id="CandidateTable">
                     <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
                         <thead>
@@ -82,7 +82,7 @@
             <div style="height: 10px"></div>
             <!-- Pagination -->
             <div class="slds-clearfix">
-                <apex:pageBlock>
+                <apex:pageBlock >
                     <apex:pageBlockButtons location="bottom">
                         <apex:outputPanel id="PaginationButton">
                             <apex:form >

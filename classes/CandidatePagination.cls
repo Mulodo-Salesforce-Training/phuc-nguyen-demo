@@ -6,9 +6,9 @@ public with sharing class CandidatePagination {
 
     // set the total size in the constructor
     public CandidatePagination () {
-        totalSize       = [SELECT count() FROM Candidate__c];
-        counter         = 0;
-        customListSize  = LIST_SIZE;
+        totalSize           = [SELECT count() FROM Candidate__c];
+        counter             = 0;
+        customListSize   = LIST_SIZE;
     }
 
     public Candidate__c[] getCandidates () {

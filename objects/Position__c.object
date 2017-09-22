@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -50,6 +46,7 @@
     <description>This object stores information about the open job positions at our company</description>
     <enableActivities>true</enableActivities>
     <enableBulkApi>false</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
@@ -129,38 +126,46 @@ Close_Date__c -  TODAY() ,
         <fullName>Functional_Area__c</fullName>
         <externalId>false</externalId>
         <label>Functional Area</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Human Resources</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Information Technology</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Miscellaneous</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Retail Operations</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Warehousing</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Finance</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Human Resources</fullName>
+                    <default>false</default>
+                    <label>Human Resources</label>
+                </value>
+                <value>
+                    <fullName>Information Technology</fullName>
+                    <default>false</default>
+                    <label>Information Technology</label>
+                </value>
+                <value>
+                    <fullName>Miscellaneous</fullName>
+                    <default>false</default>
+                    <label>Miscellaneous</label>
+                </value>
+                <value>
+                    <fullName>Retail Operations</fullName>
+                    <default>false</default>
+                    <label>Retail Operations</label>
+                </value>
+                <value>
+                    <fullName>Warehousing</fullName>
+                    <default>false</default>
+                    <label>Warehousing</label>
+                </value>
+                <value>
+                    <fullName>Finance</fullName>
+                    <default>false</default>
+                    <label>Finance</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Hire_By__c</fullName>
@@ -215,67 +220,81 @@ Close_Date__c -  TODAY() ,
         <fullName>Job_Level__c</fullName>
         <externalId>false</externalId>
         <label>Job Level</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Fresher</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Junior</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Senior</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Lead</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Manager</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Fresher</fullName>
+                    <default>false</default>
+                    <label>Fresher</label>
+                </value>
+                <value>
+                    <fullName>Junior</fullName>
+                    <default>false</default>
+                    <label>Junior</label>
+                </value>
+                <value>
+                    <fullName>Senior</fullName>
+                    <default>false</default>
+                    <label>Senior</label>
+                </value>
+                <value>
+                    <fullName>Lead</fullName>
+                    <default>false</default>
+                    <label>Lead</label>
+                </value>
+                <value>
+                    <fullName>Manager</fullName>
+                    <default>false</default>
+                    <label>Manager</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Location__c</fullName>
         <externalId>false</externalId>
         <label>Location</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Sai Gon</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Ha Noi</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Da Nang</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Hue</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>At home</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Sai Gon</fullName>
+                    <default>false</default>
+                    <label>Sai Gon</label>
+                </value>
+                <value>
+                    <fullName>Ha Noi</fullName>
+                    <default>false</default>
+                    <label>Ha Noi</label>
+                </value>
+                <value>
+                    <fullName>Da Nang</fullName>
+                    <default>false</default>
+                    <label>Da Nang</label>
+                </value>
+                <value>
+                    <fullName>Hue</fullName>
+                    <default>false</default>
+                    <label>Hue</label>
+                </value>
+                <value>
+                    <fullName>At home</fullName>
+                    <default>false</default>
+                    <label>At home</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Max_Pay__c</fullName>
@@ -333,34 +352,41 @@ Close_Date__c -  TODAY() ,
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Pending Approval</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Open - Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Closed - Filled</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Closed - Not Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Closed - Canceled</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Pending Approval</fullName>
+                    <default>false</default>
+                    <label>Pending Approval</label>
+                </value>
+                <value>
+                    <fullName>Open - Approved</fullName>
+                    <default>false</default>
+                    <label>Open - Approved</label>
+                </value>
+                <value>
+                    <fullName>Closed - Filled</fullName>
+                    <default>false</default>
+                    <label>Closed - Filled</label>
+                </value>
+                <value>
+                    <fullName>Closed - Not Approved</fullName>
+                    <default>false</default>
+                    <label>Closed - Not Approved</label>
+                </value>
+                <value>
+                    <fullName>Closed - Canceled</fullName>
+                    <default>false</default>
+                    <label>Closed - Canceled</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Travel_Required__c</fullName>
@@ -375,26 +401,31 @@ Close_Date__c -  TODAY() ,
         <fullName>Type__c</fullName>
         <externalId>false</externalId>
         <label>Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Part Time</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Internship</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Contractor</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Part Time</fullName>
+                    <default>false</default>
+                    <label>Part Time</label>
+                </value>
+                <value>
+                    <fullName>Internship</fullName>
+                    <default>false</default>
+                    <label>Internship</label>
+                </value>
+                <value>
+                    <fullName>Contractor</fullName>
+                    <default>false</default>
+                    <label>Contractor</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <label>Position</label>
     <listViews>
@@ -621,4 +652,5 @@ Close_Date__c -  TODAY() ,
     </recordTypes>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
 </CustomObject>

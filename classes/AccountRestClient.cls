@@ -1,13 +1,14 @@
 public with sharing class AccountRestClient {
     public AccountRest listAccount {
         get {
-            RestApi rest    = new RestApi();
-            rest.url        = 'https://' + URL.getSalesforceBaseUrl().getHost() + '/services/data/v40.0/query/?q=SELECT+name+from+Account+limit+10';
-            rest.method     = 'GET';
+            Utils utils     = new Utils();
+
+            String restUrl  = 'https://' + URL.getSalesforceBaseUrl().getHost() + '/services/data/v40.0/query/?q=SELECT+name+from+Account+limit+10';
+            String method   = 'GET';
             // set authorization
-            rest.author     = 'Bearer ' + userInfo.getSessionId();
+            String author   = 'Bearer ' + userInfo.getSessionId();
             // Deserialize obtained json res
-            String res   	= rest.getResponse();
+            String res   	= utils.getRestfulWSWithAuthor( restUrl, method, author );
             return ( AccountRest ) JSON.deserialize( res, AccountRest.class );
         }
     }

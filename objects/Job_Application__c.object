@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -57,6 +53,7 @@
     <description>Represents a candidate&apos;s application to a position</description>
     <enableActivities>true</enableActivities>
     <enableBulkApi>false</enableBulkApi>
+    <enableChangeDataCapture>false</enableChangeDataCapture>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
@@ -107,42 +104,51 @@ Related List Label: Job Applications</description>
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>New</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Review Resume</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Phone Screen</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Schedule Interviews</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Extend an Offer</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Hired</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>New</fullName>
+                    <default>true</default>
+                    <label>New</label>
+                </value>
+                <value>
+                    <fullName>Review Resume</fullName>
+                    <default>false</default>
+                    <label>Review Resume</label>
+                </value>
+                <value>
+                    <fullName>Phone Screen</fullName>
+                    <default>false</default>
+                    <label>Phone Screen</label>
+                </value>
+                <value>
+                    <fullName>Schedule Interviews</fullName>
+                    <default>false</default>
+                    <label>Schedule Interviews</label>
+                </value>
+                <value>
+                    <fullName>Extend an Offer</fullName>
+                    <default>false</default>
+                    <label>Extend an Offer</label>
+                </value>
+                <value>
+                    <fullName>Hired</fullName>
+                    <default>false</default>
+                    <label>Hired</label>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                    <label>Rejected</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <label>Job Application</label>
     <listViews>
@@ -159,4 +165,5 @@ Related List Label: Job Applications</description>
     <pluralLabel>Job Applications</pluralLabel>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
 </CustomObject>

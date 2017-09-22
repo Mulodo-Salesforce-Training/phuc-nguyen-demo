@@ -2,13 +2,13 @@ public with sharing class WeatherAPI {
     String location;
     public WeatherInfoDao weatherInfo {
         get {
-            RestApi rest     = new RestApi();
+            Utils utils     = new Utils();
 
-            String appId     = 'ea77eec72392d5163c6c06be812dff37';
-            rest.url         = 'https://api.openweathermap.org/data/2.5/weather?q=' + this.location + '&appid=' + appId;
-            rest.method      = 'GET';
+            String appId    = 'ea77eec72392d5163c6c06be812dff37';
+            String restUrl  = 'https://api.openweathermap.org/data/2.5/weather?q=' + this.location + '&appid=' + appId;
+            String method   = 'GET';
             // Deserialize obtained json res
-            String res       = rest.getResponse();
+            String res      = utils.getRestfulWSNoAuthor( restUrl, method );
             return ( WeatherInfoDao ) JSON.deserialize( res, WeatherInfoDao.class );
         }
     }
