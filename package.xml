@@ -66,5 +66,9 @@
         <members>UserProvisioningRequest</members>
         <name>CustomObject</name>
     </types>
+    <types>
+        <members>*</members>
+        <name>StaticResource</name>
+    </types>
     <version>40.0</version>
 </Package>
