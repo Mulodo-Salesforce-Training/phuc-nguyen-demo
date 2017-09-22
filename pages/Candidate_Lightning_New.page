@@ -14,6 +14,7 @@
         <!-- REQUIRED SLDS WRAPPER -->
         <div class="slds-scope">
             <div class="slds-align_absolute-center slds-text-heading_large" style="color: #5ADBFF;">Candidates New</div>
+            <div id="responseResult"></div>
             <div class="slds-form slds-form_stacked">
                 <div class="slds-form-element">
                     <label class="slds-form-element__label">First Name</label>
@@ -105,11 +106,13 @@
                     '{!$RemoteAction.CandidateRegister.toRegister}',
                     firstName, lastName, email, phone, street, city, stateProvince,
                     function(result, event) {
-                        console.log(result);
                         if (event.status) {
-                            alert('Register Successful');
-                        } else {
-                            alert('Register not successful yet');
+                            if (event.result == firstName) {
+                                document.getElementById("responseResult").innerHTML = "Create success Candidates with first name: " + firstName;
+                            } else {
+                                document.getElementById("responseResult").innerHTML =
+                                event.result + "<br/>";
+                            }
                         }
                     }, {
                         escape: true
