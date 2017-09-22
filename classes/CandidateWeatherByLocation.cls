@@ -1,4 +1,4 @@
-public with sharing class WeatherAPI {
+public with sharing class CandidateWeatherByLocation {
     String location;
     public WeatherInfoDao weatherInfo {
         get {
@@ -13,7 +13,7 @@ public with sharing class WeatherAPI {
         }
     }
 
-    public WeatherAPI () {
+    public CandidateWeatherByLocation () {
         ID id    = ApexPages.currentPage().getParameters().get( 'id' );
         location = [SELECT City__c FROM Candidate__c WHERE id = : id].City__c;
     }
