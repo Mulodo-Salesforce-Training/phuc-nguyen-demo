@@ -14,11 +14,11 @@ public with sharing class AccountRestClient {
 
     // Inner class to parse Account json info
 
-    class AccountRest {
+    public class AccountRest {
         public AccountRecords[] records { get; }
     }
 
-    class AccountRecords {
+    public class AccountRecords {
         public String Name { get; }
     }
 }

@@ -1,6 +1,4 @@
 public with sharing class CandidateRegister {
-    String firstName { set; get; }
-
     public CandidateRegister ( ApexPages.StandardController stdController ) {}
 
     @RemoteAction

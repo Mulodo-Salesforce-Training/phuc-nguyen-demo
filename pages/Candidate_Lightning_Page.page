@@ -82,7 +82,7 @@
             <div style="height: 10px"></div>
             <!-- Pagination -->
             <div class="slds-clearfix">
-                <apex:pageBlock >
+                <apex:pageBlock>
                     <apex:pageBlockButtons location="bottom">
                         <apex:outputPanel id="PaginationButton">
                             <apex:form >
