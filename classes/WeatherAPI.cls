@@ -14,12 +14,12 @@ public with sharing class WeatherAPI {
     }
 
     public WeatherAPI () {
-        ID id         = ApexPages.currentPage().getParameters().get( 'id' );
+        ID id    = ApexPages.currentPage().getParameters().get( 'id' );
         location = [SELECT City__c FROM Candidate__c WHERE id = : id].City__c;
     }
 
     // Define object for weather repsone
-    public class WeatherInfoDao {
+    class WeatherInfoDao {
         public Coord coord          { get; }
         public Weather[] weather    { get; }
         public String base          { get; }
@@ -33,16 +33,19 @@ public with sharing class WeatherAPI {
         public String name          { get; }
         public Integer cod          { get; }
     }
+
     class Coord {
         public Double lon           { get; }
         public Double lat           { get; }
     }
+
     class Weather {
         public Integer id           { get; }
         public String main          { get; }
         public String description   { get; }
         public String icon          { get; }
     }
+
     class Main {
         public Double temp {
             get {
@@ -55,13 +58,16 @@ public with sharing class WeatherAPI {
         public Double temp_min  { get; }
         public Double temp_max  { get; }
     }
+
     class Wind {
         public Double speed { get; }
         public Integer deg  { get; }
     }
+
     class Clouds {
         public Integer all { get; }
     }
+
     class Sys {
         public Integer type     { get; }
         public Integer id       { get; }

@@ -23,7 +23,7 @@ public with sharing class CandidateRegister {
 
         try {
             insert candidate;
-        } catch ( Exception ex ) {
+        } catch ( DmlException ex ) {
             return ex.getMessage();
         }
 
