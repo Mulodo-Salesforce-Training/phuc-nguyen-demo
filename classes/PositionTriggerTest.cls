@@ -9,8 +9,8 @@ private class PositionTriggerTest {
         Test.startTest();
             insert pos;
             insert pos1;
-            pos.Name = 'asd';
-            pos1.Name = 'asd';
+            pos.Name    = 'asd';
+            pos1.Name   = 'asd';
             update pos;
             update pos1;
         Test.stopTest();

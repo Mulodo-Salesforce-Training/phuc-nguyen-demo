@@ -22,7 +22,7 @@
                 </tr>
               </thead>
               <tbody>
-                <apex:repeat value="{!accountLst.records}" var="account">
+                <apex:repeat value="{!listAccount.records}" var="account">
                     <tr class="slds-hint-parent">
                       <td data-label="Account Name">
                         <div class="slds-truncate" title="{!account.Name}">{!account.Name}</div>

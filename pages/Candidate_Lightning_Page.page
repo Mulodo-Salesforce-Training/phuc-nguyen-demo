@@ -13,8 +13,9 @@
     <body>
         <!-- REQUIRED SLDS WRAPPER -->
         <div class="slds-scope">
-            <div class="slds-align_absolute-center slds-text-heading_large" style="color: #5ADBFF;">Candidates List Page</div>
-            <apex:pageBlock >
+            <div class="slds-align_absolute-center slds-text-heading_large" style="color: #5ADBFF;">Candidates List Page
+            </div>
+            <apex:pageBlock>
                 <apex:outputPanel id="CandidateTable">
                     <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
                         <thead>
@@ -43,30 +44,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <apex:variable var="order" value="{!0}"></apex:variable>
-                            <apex:repeat var="c" value="{!Candidates}">
+                            <apex:variable var="order" value="{! 0 }"></apex:variable>
+                            <apex:repeat var="c" value="{! Candidates }">
                                 <tr>
                                     <td data-label="Name">
-                                        <apex:variable var="order" value="{!order + 1}"></apex:variable>
-                                        <div class="slds-text-align_center slds-truncate">{!order}</div>
+                                        <apex:variable var="order" value="{! order + 1 }"></apex:variable>
+                                        <div class="slds-text-align_center slds-truncate">{! order }</div>
                                     </td>
                                     <td data-label="Name">
-                                        <div class="slds-text-align_center slds-truncate">{!c.Name}</div>
+                                        <div class="slds-text-align_center slds-truncate">{! c.Name }</div>
                                     </td>
                                     <td data-label="FirstName">
-                                        <div class="slds-text-align_center slds-truncate">{!c.First_Name__c}</div>
+                                        <div class="slds-text-align_center slds-truncate">{! c.First_Name__c }</div>
                                     </td>
                                     <td data-label="LastName">
-                                        <div class="slds-text-align_center slds-truncate">{!c.Last_Name__c}</div>
+                                        <div class="slds-text-align_center slds-truncate">{! c.Last_Name__c }</div>
                                     </td>
                                     <td data-label="City">
-                                        <div class="slds-text-align_center slds-truncate">{!c.City__c}</div>
+                                        <div class="slds-text-align_center slds-truncate">{! c.City__c }</div>
                                     </td>
                                     <td data-label="StateProvince">
-                                        <div class="slds-text-align_center slds-truncate slds-text-align_center">{!c.State_Province__c}</div>
+                                        <div class="slds-text-align_center slds-truncate slds-text-align_center">{! c.State_Province__c }</div>
                                     </td>
                                     <td data-label="Phone">
-                                        <div class="slds-text-align_center slds-truncate">{!c.Phone__c}</div>
+                                        <div class="slds-text-align_center slds-truncate">{! c.Phone__c }</div>
                                     </td>
                                 </tr>
                             </apex:repeat>
@@ -77,7 +78,7 @@
 
             <!-- make space between table and button -->
             <div style="height: 10px"></div>
-            <apex:outputLink styleClass="slds-button slds-button_neutral" value="{!URLFOR($Action.Candidate__c.New)}">Create New Candidate</apex:outputLink>
+            <apex:outputLink styleClass="slds-button slds-button_neutral" value="{! URLFOR($Action.Candidate__c.New) }">Create New Candidate</apex:outputLink>
             <div style="height: 10px"></div>
             <!-- Pagination -->
             <div class="slds-clearfix">
@@ -85,13 +86,13 @@
                     <apex:pageBlockButtons location="bottom">
                         <apex:outputPanel id="PaginationButton">
                             <apex:form >
-                                <apex:commandButton action="{!toBeginning}" title="Beginning" value="First" disabled="{!disablePrevious}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
-                                <apex:commandButton action="{!toPrevious}" title="Previous" value="Prev" disabled="{!disablePrevious}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
-                                <apex:variable var="c" value="{!CurrentPage}">
-                                    <button class="slds-button slds-button_neutral">{!c}</button>
+                                <apex:commandButton action="{! toBeginning }" title="Beginning" value="First" disabled="{! disablePrevious }" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
+                                <apex:commandButton action="{! toPrevious }" title="Previous" value="Prev" disabled="{! disablePrevious }" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
+                                <apex:variable var="c" value="{! CurrentPage }">
+                                    <button class="slds-button slds-button_neutral">{! c }</button>
                                 </apex:variable>
-                                <apex:commandButton action="{!toNext}" title="Next" value="Next" disabled="{!disableNext}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
-                                <apex:commandButton action="{!toEnd}" title="End" value="End" disabled="{!disableNext}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
+                                <apex:commandButton action="{! toNext }" title="Next" value="Next" disabled="{! disableNext }" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
+                                <apex:commandButton action="{! toEnd }" title="End" value="End" disabled="{! disableNext }" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
                             </apex:form>
                         </apex:outputPanel>
                     </apex:pageBlockButtons>

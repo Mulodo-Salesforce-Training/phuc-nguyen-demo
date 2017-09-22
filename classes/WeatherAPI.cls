@@ -1,5 +1,5 @@
 public with sharing class WeatherAPI {
-    public String location { get; set; }
+    String location;
     public WeatherInfoDao weatherInfo {
         get {
             RestApi rest     = new RestApi();
@@ -9,41 +9,39 @@ public with sharing class WeatherAPI {
             rest.method      = 'GET';
             // Deserialize obtained json res
             String res       = rest.getResponse();
-            this.weatherInfo = ( WeatherInfoDao ) JSON.deserialize( res, WeatherInfoDao.class );
-            return this.weatherInfo;
+            return ( WeatherInfoDao ) JSON.deserialize( res, WeatherInfoDao.class );
         }
-        set;
     }
 
     public WeatherAPI () {
         ID id         = ApexPages.currentPage().getParameters().get( 'id' );
-        this.location = [SELECT City__c FROM Candidate__c WHERE id = : id].City__c;
+        location = [SELECT City__c FROM Candidate__c WHERE id = : id].City__c;
     }
 
     // Define object for weather repsone
     public class WeatherInfoDao {
-        public Coord coord          { get; set; }
-        public Weather[] weather    { get; set; }
-        public String base          { get; set; }
-        public Main main            { get; set; }
-        public Integer visibility   { get; set; }
-        public Wind wind            { get; set; }
-        public Clouds clouds        { get; set; }
-        public Integer dt           { get; set; }
-        public Sys sys              { get; set; }
-        public Integer id           { get; set; }
-        public String name          { get; set; }
-        public Integer cod          { get; set; }
+        public Coord coord          { get; }
+        public Weather[] weather    { get; }
+        public String base          { get; }
+        public Main main            { get; }
+        public Integer visibility   { get; }
+        public Wind wind            { get; }
+        public Clouds clouds        { get; }
+        public Integer dt           { get; }
+        public Sys sys              { get; }
+        public Integer id           { get; }
+        public String name          { get; }
+        public Integer cod          { get; }
     }
     class Coord {
-        public Double lon           { get; set; }
-        public Double lat           { get; set; }
+        public Double lon           { get; }
+        public Double lat           { get; }
     }
     class Weather {
-        public Integer id           { get; set; }
-        public String main          { get; set; }
-        public String description   { get; set; }
-        public String icon          { get; set; }
+        public Integer id           { get; }
+        public String main          { get; }
+        public String description   { get; }
+        public String icon          { get; }
     }
     class Main {
         public Double temp {
@@ -52,24 +50,24 @@ public with sharing class WeatherAPI {
             }
             set;
         } //279.15
-        public Integer pressure { get; set; }
-        public Integer humidity { get; set; }
-        public Double temp_min  { get; set; }
-        public Double temp_max  { get; set; }
+        public Integer pressure { get; }
+        public Integer humidity { get; }
+        public Double temp_min  { get; }
+        public Double temp_max  { get; }
     }
     class Wind {
-        public Double speed { get; set; }
-        public Integer deg  { get; set; }
+        public Double speed { get; }
+        public Integer deg  { get; }
     }
     class Clouds {
-        public Integer all { get; set; }
+        public Integer all { get; }
     }
     class Sys {
-        public Integer type     { get; set; }
-        public Integer id       { get; set; }
-        public Double message   { get; set; }
-        public String country   { get; set; }
-        public Integer sunrise  { get; set; }
-        public Integer sunset   { get; set; }
+        public Integer type     { get; }
+        public Integer id       { get; }
+        public Double message   { get; }
+        public String country   { get; }
+        public Integer sunrise  { get; }
+        public Integer sunset   { get; }
     }
 }

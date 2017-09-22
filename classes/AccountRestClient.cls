@@ -1,5 +1,5 @@
 public with sharing class AccountRestClient {
-    public AccountRest accountLst {
+    public AccountRest listAccount {
         get {
             RestApi rest    = new RestApi();
             rest.url        = 'https://' + URL.getSalesforceBaseUrl().getHost() + '/services/data/v40.0/query/?q=SELECT+name+from+Account+limit+10';
@@ -8,17 +8,17 @@ public with sharing class AccountRestClient {
             rest.author     = 'Bearer ' + userInfo.getSessionId();
             // Deserialize obtained json res
             String res   	= rest.getResponse();
-            this.accountLst = ( AccountRest ) JSON.deserialize( res, AccountRest.class );
-            return this.accountLst;
+            return ( AccountRest ) JSON.deserialize( res, AccountRest.class );
         }
-        set;
     }
 
     // Inner class to parse Account json info
-    public class AccountRest {
-        public AccountRecords[] records { get; set; }
+
+    class AccountRest {
+        public AccountRecords[] records { get; }
     }
+
     class AccountRecords {
-        public String Name { get; set; }
+        public String Name { get; }
     }
 }

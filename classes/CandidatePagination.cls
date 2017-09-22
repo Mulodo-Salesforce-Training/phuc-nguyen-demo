@@ -1,18 +1,21 @@
 public with sharing class CandidatePagination {
-    Integer counter  = 0;
-    Integer listSize = 9;
-    public Integer totalSize;
+    final Integer LIST_SIZE = 9;                // the size of list per page
+    Integer counter;
+    Integer totalSize;
+    public Integer customListSize { get; set; } // custom size of list per page will be changed be user
 
-    //set the total size in the constructor
+    // set the total size in the constructor
     public CandidatePagination () {
-        totalSize = [SELECT count() FROM Candidate__c];
+        totalSize           = [SELECT count() FROM Candidate__c];
+        counter             = 0;
+        customListSize   = LIST_SIZE;
     }
 
     public Candidate__c[] getCandidates () {
         try {
             Candidate__c[] candidates = [SELECT Name, First_Name__c, Last_Name__c, City__c, State_Province__c, Phone__c
                                          FROM Candidate__c
-                                         LIMIT: listSize
+                                         LIMIT: customListSize
                                          OFFSET: counter];
             return candidates;
         } catch ( QueryException e ) {
@@ -21,31 +24,31 @@ public with sharing class CandidatePagination {
         }
     }
 
-    //user clicked beginning
+    // user clicked beginning
     public PageReference toBeginning () {
         counter = 0;
         return null;
     }
 
-    //user clicked previous button
+    // user clicked previous button
     public PageReference toPrevious () {
-        counter -= listSize;
+        counter -= customListSize;
         return null;
     }
 
-    //user clicked next button
+    // user clicked next button
     public PageReference toNext () {
-        counter += listSize;
+        counter += customListSize;
         return null;
     }
 
-    //user clicked end
+    // user clicked end
     public PageReference toEnd () {
-        counter = totalSize - math.mod( totalSize, listSize );
+        counter = totalSize - math.mod( totalSize, customListSize );
         return null;
     }
 
-    //this will disable the previous and beginning buttons
+    // this will disable the previous and beginning buttons
     public Boolean getDisablePrevious () {
         if ( counter > 0 ) {
             return false;
@@ -54,9 +57,9 @@ public with sharing class CandidatePagination {
         }
     }
 
-    //this will disable the next and end buttons
+    // this will disable the next and end buttons
     public Boolean getDisableNext () {
-        if ( counter + listSize < totalSize ) {
+        if ( counter + customListSize < totalSize ) {
             return false;
         } else {
             return true;
@@ -64,7 +67,7 @@ public with sharing class CandidatePagination {
     }
 
     public Integer getCurrentPage () {
-        return counter / listSize + 1;
+        return counter / customListSize + 1;
     }
 
     //public Integer getTotalSize () {
@@ -72,14 +75,14 @@ public with sharing class CandidatePagination {
     //}
 
     //public Integer getPageNumber () {
-    //    return counter / listSize + 1;
+    //    return counter / customListSize + 1;
     //}
 
     //public Integer getTotalPages () {
-    //    if (math.mod(totalSize, listSize) > 0) {
-    //        return totalSize / listSize + 1;
+    //    if (math.mod(totalSize, customListSize) > 0) {
+    //        return totalSize / customListSize + 1;
     //    } else {
-    //        return (totalSize / listSize);
+    //        return (totalSize / customListSize);
     //    }
     //}
 
