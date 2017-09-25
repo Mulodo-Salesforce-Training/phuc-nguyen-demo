@@ -5,6 +5,9 @@ public with sharing class CandidatePagination {
     public Integer customListSize { get; set; } // custom size of list per page will be changed be user
     public List<Candidate__c> candidates {
         get {
+            /*
+                Correct counter after change size of list
+            */
             if ( math.mod( counter, customListSize ) != 0 ) {
                 counter -= math.mod( counter, customListSize );
             }
@@ -15,32 +18,35 @@ public with sharing class CandidatePagination {
         }
     }
 
-    // set the total size in the constructor
+    // Set the total size in the constructor
     public CandidatePagination () {
         totalSize           = [SELECT count() FROM Candidate__c];
         counter             = 0;
         customListSize      = LIST_SIZE;
     }
 
-    // user clicked beginning
+    // User clicked beginning
     public PageReference toBeginning () {
         counter = 0;
         return null;
     }
 
-    // user clicked previous button
+    // User clicked previous button
     public PageReference toPrevious () {
         counter -= customListSize;
         return null;
     }
 
-    // user clicked next button
+    // User clicked next button
     public PageReference toNext () {
         counter += customListSize;
         return null;
     }
 
-    // user clicked end
+    // User clicked end
+    /*
+        Add condition to check if last page list is less than custom size list
+    */
     public PageReference toEnd () {
         if ( math.mod( totalSize, customListSize ) == 0 ) {
             counter = totalSize - customListSize;
@@ -50,7 +56,7 @@ public with sharing class CandidatePagination {
         return null;
     }
 
-    // this will disable the previous and beginning buttons
+    // This will disable the previous and beginning buttons
     public Boolean getDisablePrevious () {
         if ( counter > 0 ) {
             return false;
@@ -59,7 +65,7 @@ public with sharing class CandidatePagination {
         }
     }
 
-    // this will disable the next and end buttons
+    // This will disable the next and end buttons
     public Boolean getDisableNext () {
         if ( counter + customListSize < totalSize ) {
             return false;
