@@ -3,7 +3,7 @@ public with sharing class AccountRestClient {
         get {
             Utils utils     = new Utils();
             String format   = 'https://{0}/services/data/v40.0/query/?q={1}';
-            List<String> filters = new String[]{
+            List<String> filters = new String[] {
                 Url.getCurrentRequestUrl().getHost(),   // Get host
                 'SELECT+Name+from+Account+Limit+10'     // Query
             };

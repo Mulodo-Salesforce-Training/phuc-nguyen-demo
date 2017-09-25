@@ -1,4 +1,4 @@
-<apex:page showHeader="true" standardStylesheets="false" sidebar="true" applyHtmlTag="true" applyBodyTag="false" docType="html-5.0" controller="CandidateWeatherByLocation" tabStyle="candidate_list__tab">
+<apex:page showHeader="true" standardStylesheets="false" sidebar="true" applyHtmlTag="true" applyBodyTag="false" docType="html-5.0" controller="CandidateWeatherByLocation" tabStyle="Candidates__tab">
     <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
 
     <head>

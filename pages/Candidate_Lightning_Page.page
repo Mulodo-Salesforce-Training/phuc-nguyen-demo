@@ -52,7 +52,11 @@
                                         <div class="slds-text-align_center slds-truncate">{! order }</div>
                                     </td>
                                     <td data-label="Name">
-                                        <div class="slds-text-align_center slds-truncate">{! c.Name }</div>
+                                        <div class="slds-text-align_center slds-truncate">
+                                            <a href="/{! c.Id }">
+                                                {! c.Name }
+                                            </a>
+                                        </div>
                                     </td>
                                     <td data-label="FirstName">
                                         <div class="slds-text-align_center slds-truncate">{! c.First_Name__c }</div>
