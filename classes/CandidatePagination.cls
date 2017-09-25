@@ -3,25 +3,20 @@ public with sharing class CandidatePagination {
     Integer counter;
     Integer totalSize;
     public Integer customListSize { get; set; } // custom size of list per page will be changed be user
+    public List<Candidate__c> candidates {
+        get {
+            return [SELECT Name, First_Name__c, Last_Name__c, City__c, State_Province__c, Phone__c
+                    FROM Candidate__c
+                    LIMIT: customListSize
+                    OFFSET: counter];
+        }
+    }
 
     // set the total size in the constructor
     public CandidatePagination () {
         totalSize           = [SELECT count() FROM Candidate__c];
         counter             = 0;
-        customListSize   = LIST_SIZE;
-    }
-
-    public Candidate__c[] getCandidates () {
-        try {
-            Candidate__c[] candidates = [SELECT Name, First_Name__c, Last_Name__c, City__c, State_Province__c, Phone__c
-                                         FROM Candidate__c
-                                         LIMIT: customListSize
-                                         OFFSET: counter];
-            return candidates;
-        } catch ( QueryException e ) {
-            ApexPages.addMessages( e );
-            return null;
-        }
+        customListSize      = LIST_SIZE;
     }
 
     // user clicked beginning
