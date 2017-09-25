@@ -9,7 +9,7 @@ public with sharing class CandidateWeatherByLocation {
                 location,
                 'ea77eec72392d5163c6c06be812dff37'
             };
-            String restUrl = String.format( format, filters );
+            String restUrl  = String.format( format, filters );
             System.debug(restUrl);
             String method   = 'GET';
             // Deserialize obtained json res

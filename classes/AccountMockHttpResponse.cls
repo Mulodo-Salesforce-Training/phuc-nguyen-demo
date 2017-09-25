@@ -1,5 +1,5 @@
 @isTest
-global class MockHttpResponse implements HttpCalloutMock {
+global class AccountMockHttpResponse implements HttpCalloutMock {
     // Implement this interface method
     global HTTPResponse respond( HTTPRequest req ) {
         // Optionally, only send a mock response for a specific endpoint
@@ -10,6 +10,7 @@ global class MockHttpResponse implements HttpCalloutMock {
         // Create a fake response
         HttpResponse res = new HttpResponse();
         res.setHeader( 'Content-Type', 'application/json' );
+        res.setHeader( 'Authorization', 'Bearer ' + userInfo.getSessionId() );
         res.setBody( '{"records":[{"Name": "Phuc Nguyen"}]}' );
         res.setStatusCode( 200 );
         return res;

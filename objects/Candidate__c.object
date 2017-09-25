@@ -1235,11 +1235,6 @@
         <unique>false</unique>
     </fields>
     <label>Candidate</label>
-    <listViews>
-        <fullName>All</fullName>
-        <filterScope>Everything</filterScope>
-        <label>All</label>
-    </listViews>
     <nameField>
         <displayFormat>C-{00000}</displayFormat>
         <label>Candidate Name</label>
