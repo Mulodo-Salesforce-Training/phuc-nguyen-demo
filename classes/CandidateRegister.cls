@@ -1,5 +1,5 @@
 public with sharing class CandidateRegister {
-    public CandidateRegister ( ApexPages.StandardController stdController ) {}
+    //public CandidateRegister ( ApexPages.StandardController stdController ) {}
 
     @RemoteAction
     public static String toRegister ( String firstName,
