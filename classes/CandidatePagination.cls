@@ -5,6 +5,9 @@ public with sharing class CandidatePagination {
     public Integer customListSize { get; set; } // custom size of list per page will be changed be user
     public List<Candidate__c> candidates {
         get {
+            if ( math.mod( counter, customListSize ) != 0 ) {
+                counter -= math.mod( counter, customListSize );
+            }
             return [SELECT Name, First_Name__c, Last_Name__c, City__c, State_Province__c, Phone__c
                     FROM Candidate__c
                     LIMIT: customListSize
@@ -39,7 +42,11 @@ public with sharing class CandidatePagination {
 
     // user clicked end
     public PageReference toEnd () {
-        counter = totalSize - math.mod( totalSize, customListSize );
+        if ( math.mod( totalSize, customListSize ) == 0 ) {
+            counter = totalSize - customListSize;
+        } else {
+            counter = totalSize - math.mod( totalSize, customListSize );
+        }
         return null;
     }
 
