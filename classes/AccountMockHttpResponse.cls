@@ -9,6 +9,7 @@ global class AccountMockHttpResponse implements HttpCalloutMock {
 
         // Create a fake response
         HttpResponse res = new HttpResponse();
+
         res.setHeader( 'Content-Type', 'application/json' );
         res.setHeader( 'Authorization', 'Bearer ' + userInfo.getSessionId() );
         res.setBody( '{"records":[{"Name": "Phuc Nguyen"}]}' );
