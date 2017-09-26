@@ -257,6 +257,17 @@ Close_Date__c -  TODAY() ,
         </valueSet>
     </fields>
     <fields>
+        <fullName>Level__c</fullName>
+        <externalId>false</externalId>
+        <label>Level</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Location__c</fullName>
         <externalId>false</externalId>
         <label>Location</label>
@@ -447,6 +458,10 @@ Close_Date__c -  TODAY() ,
         <label>IT positions</label>
         <picklistValues>
             <picklist>Functional_Area__c</picklist>
+            <values>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Information Technology</fullName>
                 <default>false</default>

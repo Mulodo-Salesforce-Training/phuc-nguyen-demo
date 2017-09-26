@@ -18,25 +18,29 @@
             <div id="responseResult"></div>
             <div class="slds-form slds-form_stacked">
                 <div class="slds-form-element">
-                    <label class="slds-form-element__label">First Name</label>
+                    <label class="slds-form-element__label">First Name <span style="color: red">*</span>
+                    </label>
                     <div class="slds-form-element__control">
                         <input type="text" class="slds-input" id="firstName" name="firstName" />
                     </div>
                 </div>
                 <div class="slds-form-element">
-                    <label class="slds-form-element__label">Last Name</label>
+                    <label class="slds-form-element__label">Last Name <span style="color: red">*</span>
+                    </label>
                     <div class="slds-form-element__control">
                         <input type="text" class="slds-input" id="lastName" name="lastName" />
                     </div>
                 </div>
                 <div class="slds-form-element">
-                    <label class="slds-form-element__label">Email</label>
+                    <label class="slds-form-element__label">Email <span style="color: red">*</span>
+                    </label>
                     <div class="slds-form-element__control">
                         <input type="email" class="slds-input" id="email" name="email" />
                     </div>
                 </div>
                 <div class="slds-form-element">
-                    <label class="slds-form-element__label">Phone</label>
+                    <label class="slds-form-element__label">Phone <span style="color: red">*</span>
+                    </label>
                     <div class="slds-form-element__control">
                         <input type="number" class="slds-input" id="phone" name="phone" />
                     </div>

@@ -19,10 +19,10 @@
             <apex:pageBlock >
                 <apex:form >
                     <label>Size list</label>
-                    <apex:inputText styleClass="slds-input" value="{! customListSize }"/>
+                    <apex:inputText styleClass="slds-input" value="{!customListSize}"/>
                     <apex:commandButton styleClass="slds-button slds-button_neutral" reRender="CandidateTable, PaginationButton" value="Change size"/>
                     <button class="slds-button slds-button_neutral">
-                        <a href="{! URLFOR($Action.Candidate__c.New) }">
+                        <a href="{!URLFOR($Action.Candidate__c.New)}">
                             Create New Candidate
                         </a>
                     </button>
@@ -57,34 +57,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <apex:variable var="order" value="{! 0 }"></apex:variable>
-                            <apex:repeat var="c" value="{! candidates }">
+                            <apex:variable var="order" value="{!0}"></apex:variable>
+                            <apex:repeat var="c" value="{!candidates}">
                                 <tr>
                                     <td data-label="Name">
-                                        <apex:variable var="order" value="{! order + 1 }"></apex:variable>
-                                        <div class="slds-text-align_center slds-truncate">{! order }</div>
+                                        <apex:variable var="order" value="{!order + 1}"></apex:variable>
+                                        <div class="slds-text-align_center slds-truncate">{!order}</div>
                                     </td>
                                     <td data-label="Name">
                                         <div class="slds-text-align_center slds-truncate">
-                                            <a href="/{! c.Id }">
-                                                {! c.Name }
+                                            <a href="/{!c.Id}">
+                                                {!c.Name}
                                             </a>
                                         </div>
                                     </td>
                                     <td data-label="FirstName">
-                                        <div class="slds-text-align_center slds-truncate">{! c.First_Name__c }</div>
+                                        <div class="slds-text-align_center slds-truncate">{!c.First_Name__c}</div>
                                     </td>
                                     <td data-label="LastName">
-                                        <div class="slds-text-align_center slds-truncate">{! c.Last_Name__c }</div>
+                                        <div class="slds-text-align_center slds-truncate">{!c.Last_Name__c}</div>
                                     </td>
                                     <td data-label="City">
-                                        <div class="slds-text-align_center slds-truncate">{! c.City__c }</div>
+                                        <div class="slds-text-align_center slds-truncate">{!c.City__c}</div>
                                     </td>
                                     <td data-label="StateProvince">
-                                        <div class="slds-text-align_center slds-truncate slds-text-align_center">{! c.State_Province__c }</div>
+                                        <div class="slds-text-align_center slds-truncate slds-text-align_center">{!c.State_Province__c}</div>
                                     </td>
                                     <td data-label="Phone">
-                                        <div class="slds-text-align_center slds-truncate">{! c.Phone__c }</div>
+                                        <div class="slds-text-align_center slds-truncate">{!c.Phone__c}</div>
                                     </td>
                                 </tr>
                             </apex:repeat>
@@ -101,13 +101,13 @@
                     <apex:pageBlockButtons location="bottom">
                         <apex:outputPanel id="PaginationButton">
                             <apex:form >
-                                <apex:commandButton action="{! toBeginning }" title="Beginning" value="First" disabled="{! disablePrevious }" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
-                                <apex:commandButton action="{! toPrevious }" title="Previous" value="Prev" disabled="{! disablePrevious }" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
-                                <apex:variable var="c" value="{! CurrentPage }">
-                                    <button class="slds-button slds-button_neutral">{! c }</button>
+                                <apex:commandButton action="{!toBeginning}" title="Beginning" value="First" disabled="{!disablePrevious}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
+                                <apex:commandButton action="{!toPrevious}" title="Previous" value="Prev" disabled="{!disablePrevious}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
+                                <apex:variable var="c" value="{!CurrentPage}">
+                                    <button class="slds-button slds-button_neutral">{!c}</button>
                                 </apex:variable>
-                                <apex:commandButton action="{! toNext }" title="Next" value="Next" disabled="{! disableNext }" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
-                                <apex:commandButton action="{! toEnd }" title="End" value="End" disabled="{! disableNext }" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
+                                <apex:commandButton action="{!toNext}" title="Next" value="Next" disabled="{!disableNext}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
+                                <apex:commandButton action="{!toEnd}" title="End" value="End" disabled="{!disableNext}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
                             </apex:form>
                         </apex:outputPanel>
                     </apex:pageBlockButtons>

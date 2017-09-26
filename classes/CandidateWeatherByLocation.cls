@@ -5,15 +5,16 @@ public with sharing class CandidateWeatherByLocation {
             Utils utils          = new Utils();
 
             String format        = 'https://api.openweathermap.org/data/2.5/weather?q={0}&appid={1}';
-            List<String> filters = new String[]{
+            List< String > filters = new String[]{
                 location,
                 'ea77eec72392d5163c6c06be812dff37'
             };
+
             String restUrl  = String.format( format, filters );
-            System.debug(restUrl);
             String method   = 'GET';
             // Deserialize obtained json res
-            String res      = utils.getRestfulWSNoAuthor( restUrl, method );
+            String n, m = null;
+            String res      = utils.getRestfulWS( restUrl, method, n, m );
             return ( WeatherInfoDao ) JSON.deserialize( res, WeatherInfoDao.class );
         }
     }
