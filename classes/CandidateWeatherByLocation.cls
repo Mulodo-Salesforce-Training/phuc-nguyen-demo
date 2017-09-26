@@ -13,8 +13,8 @@ public with sharing class CandidateWeatherByLocation {
             String restUrl  = String.format( format, filters );
             String method   = 'GET';
             // Deserialize obtained json res
-            String n, m = null;
-            String res      = utils.getRestfulWS( restUrl, method, n, m );
+            String author, body = null;
+            String res      = utils.getRestfulWS( restUrl, method, author, body );
             return ( WeatherInfoDao ) JSON.deserialize( res, WeatherInfoDao.class );
         }
     }
