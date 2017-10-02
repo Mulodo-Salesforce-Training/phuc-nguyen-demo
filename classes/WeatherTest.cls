@@ -2,15 +2,15 @@
 private class WeatherTest {
     @isTest static void testCallout () {
         // Set mock callout class
-        Test.setMock(HttpCalloutMock.class, new WeatherMockHttpResponse());
+        Test.setMock( HttpCalloutMock.class, new WeatherMockHttpResponse() );
 
         // Call method to test.
         // This causes a fake response to be sent
         // from the class that implements HttpCalloutMock.
-        HttpResponse res = new CalloutClass().getInfoFromExternalService();
+        HttpResponse res     = new CalloutClass().getInfoFromExternalService();
 
         // Verify response received contains fake values
-        String actualValue = res.getBody();
+        String actualValue   = res.getBody();
         String expectedValue = '{"coord":"Wind", "clouds":"cloud"}';
         System.assertEquals(actualValue, expectedValue);
         System.assertEquals(200, res.getStatusCode());

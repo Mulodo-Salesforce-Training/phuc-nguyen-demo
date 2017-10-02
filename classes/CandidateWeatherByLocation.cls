@@ -2,9 +2,9 @@ public with sharing class CandidateWeatherByLocation {
     String location;
     public WeatherInfoDao weatherInfo {
         get {
-            Utils utils          = new Utils();
+            Utils utils            = new Utils();
 
-            String format        = 'https://api.openweathermap.org/data/2.5/weather?q={0}&appid={1}';
+            String format          = 'https://api.openweathermap.org/data/2.5/weather?q={0}&appid={1}';
             List< String > filters = new String[]{
                 location,
                 'ea77eec72392d5163c6c06be812dff37'

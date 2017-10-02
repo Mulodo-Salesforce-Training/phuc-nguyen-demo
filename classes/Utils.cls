@@ -23,7 +23,7 @@ public class Utils {
 
         req.setBody( body );
 
-        Http http = new Http();
+        Http http        = new Http();
         // Send req to server and get response
         HttpResponse res = http.send( req );
         // return json response
