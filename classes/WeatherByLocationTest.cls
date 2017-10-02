@@ -2,10 +2,10 @@
 private class WeatherByLocationTest {
 	@isTest static void weatherMethod() {
 
-		// Set mock callout class
+		// set mock callout class
         Test.setMock( HttpCalloutMock.class, new WeatherMockHttpResponse() );
 
-        		// Create & Insert a new Candidate to get Id & City(Location)
+        // create & insert a new Candidate to get Id & City(Location)
 		Candidate__c can = new Candidate__c( City__c = 'Sai Gon' );
 
 		insert can;
@@ -21,6 +21,5 @@ private class WeatherByLocationTest {
 		System.assertEquals( 10, wid.Coord.lon );
 		System.assertEquals( 20, wid.Coord.lat );
 		System.assertEquals( 'Sai Gon', can.City__c );
-
 	}
 }

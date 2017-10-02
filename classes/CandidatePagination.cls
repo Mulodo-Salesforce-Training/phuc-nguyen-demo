@@ -1,6 +1,6 @@
 public class CandidatePagination {
-    // the size of list per page
-    // custom size of list per page will be changed be user
+    // the size of list per page as default
+    // custom size of list per page will be changed by user
     final Integer LIST_SIZE = 9;
     private Integer counter, totalSize, customListSize;
 
@@ -60,7 +60,11 @@ public class CandidatePagination {
     */
     public PageReference toEnd () {
         Integer mod  = math.mod( this.totalSize, this.customListSize );
-        this.counter = mod != 0 ? this.totalSize - mod : this.totalSize - this.customListSize;
+        // get the last counter of page right before the end
+        this.counter = mod != 0 ?
+                    ( this.totalSize - mod )                    // true
+                    :
+                    ( this.totalSize - this.customListSize );   // false
         return null;
     }
 
@@ -71,7 +75,7 @@ public class CandidatePagination {
 
     // This will disable the next and end buttons
     public Boolean getDisableNext () {
-        if ( this.counter + this.customListSize < this.totalSize ) {
+        if ( ( this.counter + this.customListSize ) < this.totalSize ) {
             return false;
         } else {
             return true;
@@ -79,6 +83,6 @@ public class CandidatePagination {
     }
 
     public Integer getCurrentPage () {
-        return this.counter / this.customListSize + 1;
+        return this.counter / ( this.customListSize + 1 );
     }
 }

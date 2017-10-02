@@ -18,7 +18,7 @@ public class CandidateWeatherByLocation {
             // Using get method and no need to use author so define as null
             String author, body    = null;
             // Deserialize obtained json res
-            String res             = utils.getRestfulWS( restUrl, method, author, body );
+            String res             = utils.execRestApi( restUrl, method, author, body );
             return ( WeatherInfoDao ) JSON.deserialize( res, WeatherInfoDao.class );
         }
     }

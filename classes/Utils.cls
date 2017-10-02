@@ -1,9 +1,11 @@
 public class Utils {
     /*
-        RestfulWS tools to connect and response json with author required
+        # restfulWS help function to connect and response json
+        # all method
+        # with author support
     */
-    public String getRestfulWS ( String url, String method, String author, String body ) {
-        // Init Http Request ready to send to server API
+    public String execRestApi ( String url, String method, String author, String body ) {
+        // init Http Request ready to send to server API
         HttpRequest req = new HttpRequest();
 
         // the url is blank
@@ -28,7 +30,7 @@ public class Utils {
 
         Http http        = new Http();
 
-        // Send req to server and get response
+        // send req to server and get response
         HttpResponse res = http.send( req );
         // return json response
         return res.getBody();
