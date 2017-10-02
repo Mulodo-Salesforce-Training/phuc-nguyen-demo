@@ -1,4 +1,4 @@
-function getRemoteAccount () {
+function addNewCandidate () {
     let firstName     = document.getElementById('firstName').value;
     let lastName      = document.getElementById('lastName').value;
     let email         = document.getElementById('email').value;

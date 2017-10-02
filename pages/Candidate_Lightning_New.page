@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <div class="slds-form-element">
-                    <button class="slds-button slds-button_neutral" onclick="getRemoteAccount();">Resister New</button>
+                    <button class="slds-button slds-button_neutral" onclick="addNewCandidate();">Resister New</button>
                 </div>
             </div>
         </div>
