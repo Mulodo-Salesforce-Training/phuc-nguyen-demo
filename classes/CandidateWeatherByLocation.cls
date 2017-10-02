@@ -1,27 +1,29 @@
 public with sharing class CandidateWeatherByLocation {
-    String location;
+    private String location;
     public WeatherInfoDao weatherInfo {
         get {
             Utils utils            = new Utils();
 
+            String appId           = 'ea77eec72392d5163c6c06be812dff37';
             String format          = 'https://api.openweathermap.org/data/2.5/weather?q={0}&appid={1}';
             List< String > filters = new String[]{
-                location,
-                'ea77eec72392d5163c6c06be812dff37'
+                this.location,
+                appId
             };
 
-            String restUrl  = String.format( format, filters );
-            String method   = 'GET';
-            // Deserialize obtained json res
+            String restUrl      = String.format( format, filters );
+            String method       = 'GET';
+            // Using get method and no need to use author so define as null
             String author, body = null;
-            String res      = utils.getRestfulWS( restUrl, method, author, body );
+            // Deserialize obtained json res
+            String res          = utils.getRestfulWS( restUrl, method, author, body );
             return ( WeatherInfoDao ) JSON.deserialize( res, WeatherInfoDao.class );
         }
     }
 
     public CandidateWeatherByLocation () {
         ID id    = ApexPages.currentPage().getParameters().get( 'id' );
-        location = [SELECT City__c FROM Candidate__c WHERE id = : id].City__c;
+        this.location = [SELECT City__c FROM Candidate__c WHERE id = : id].City__c;
     }
 
     // Define object for weather repsone
@@ -55,7 +57,7 @@ public with sharing class CandidateWeatherByLocation {
     class Main {
         public Double temp {
             get {
-                return ( Integer ) this.temp / 10;
+                return ( Integer ) temp / 10;
             }
             set;
         } //279.15
