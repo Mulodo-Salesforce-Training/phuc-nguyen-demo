@@ -10,7 +10,7 @@ public class Utils {
             return '';
         }
 
-        if ( String.isBlank( method ) || ( method == 'POST' && String.isBlank( body ) ) ) {
+        if ( String.isBlank( method ) || ( method != 'GET' && String.isBlank( body ) ) ) {
             return '';
         }
 
