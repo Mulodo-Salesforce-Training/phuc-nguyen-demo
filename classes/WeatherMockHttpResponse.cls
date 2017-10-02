@@ -10,6 +10,15 @@ global class WeatherMockHttpResponse implements HttpCalloutMock {
         // Create a fake response
         HttpResponse res = new HttpResponse();
 
+        /*
+            json sample
+            {
+                'coord' : {
+                    'lon' : 10,
+                    'lat' : 20
+                }
+            }
+        */
         res.setBody( '{ \'coord\' : { \'lon\' : 10, \'lat\' : 20 }' );
         res.setStatusCode( 200 );
         return res;
