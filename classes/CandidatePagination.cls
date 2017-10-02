@@ -59,8 +59,8 @@ public class CandidatePagination {
         Add condition to check if last page list is less than custom size list
     */
     public PageReference toEnd () {
-        Integer mod = math.mod( this.totalSize, this.customListSize );
-        this.counter     = mod != 0 ? this.totalSize - mod : this.totalSize - this.customListSize;
+        Integer mod  = math.mod( this.totalSize, this.customListSize );
+        this.counter = mod != 0 ? this.totalSize - mod : this.totalSize - this.customListSize;
         return null;
     }
 
