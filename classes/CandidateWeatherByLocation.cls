@@ -1,33 +1,35 @@
-public with sharing class CandidateWeatherByLocation {
+public class CandidateWeatherByLocation {
     private String location;
     public WeatherInfoDao weatherInfo {
         get {
             Utils utils            = new Utils();
 
             String appId           = 'ea77eec72392d5163c6c06be812dff37';
-            String format          = 'https://api.openweathermap.org/data/2.5/weather?q={0}&appid={1}';
+            String format          = 'https://api.openweathermap.org/data/2.5/weather?'
+                                   + 'q={0}&'
+                                   + 'appid={1}';
             List< String > filters = new String[]{
                 this.location,
                 appId
             };
 
-            String restUrl      = String.format( format, filters );
-            String method       = 'GET';
+            String restUrl         = String.format( format, filters );
+            String method          = 'GET';
             // Using get method and no need to use author so define as null
-            String author, body = null;
+            String author, body    = null;
             // Deserialize obtained json res
-            String res          = utils.getRestfulWS( restUrl, method, author, body );
+            String res             = utils.getRestfulWS( restUrl, method, author, body );
             return ( WeatherInfoDao ) JSON.deserialize( res, WeatherInfoDao.class );
         }
     }
 
     public CandidateWeatherByLocation () {
-        ID id    = ApexPages.currentPage().getParameters().get( 'id' );
+        ID id         = ApexPages.currentPage().getParameters().get( 'id' );
         this.location = [SELECT City__c FROM Candidate__c WHERE id = : id].City__c;
     }
 
     // Define object for weather repsone
-    class WeatherInfoDao {
+    public class WeatherInfoDao {
         public Coord coord          { get; }
         public Weather[] weather    { get; }
         public String base          { get; }
@@ -42,7 +44,7 @@ public with sharing class CandidateWeatherByLocation {
         public Integer cod          { get; }
     }
 
-    class Coord {
+    public class Coord {
         public Double lon           { get; }
         public Double lat           { get; }
     }

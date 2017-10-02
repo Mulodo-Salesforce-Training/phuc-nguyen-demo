@@ -11,7 +11,7 @@ private class WeatherTest {
 
         // Verify response received contains fake values
         String actualValue   = res.getBody();
-        String expectedValue = '{"coord":"Wind", "clouds":"cloud"}';
+        String expectedValue = '{\'coord\':\'Wind\', \'clouds\':\'cloud\'}';
         System.assertEquals(actualValue, expectedValue);
         System.assertEquals(200, res.getStatusCode());
     }
