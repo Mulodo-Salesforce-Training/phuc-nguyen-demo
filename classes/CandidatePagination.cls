@@ -1,47 +1,56 @@
-public with sharing class CandidatePagination {
-    final Integer LIST_SIZE = 9;                // the size of list per page
-    Integer counter;
-    Integer totalSize;
-    public Integer customListSize { get; set; } // custom size of list per page will be changed be user
+public class CandidatePagination {
+    // the size of list per page
+    // custom size of list per page will be changed be user
+    final Integer LIST_SIZE = 9;
+    private Integer counter, totalSize, customListSize;
+
+    public Integer getCustomListSize () {
+        return this.customListSize;
+    }
+
+    public void setCustomListSize ( Integer customListSize ) {
+        this.customListSize = customListSize;
+
+        /*
+        Correct this.counter after change size of list
+        */
+        if ( math.mod( this.counter, this.customListSize ) != 0 ) {
+            this.counter -= math.mod( this.counter, this.customListSize );
+        }
+
+    }
+
     public List< Candidate__c > candidates {
         get {
-
-            /*
-                Correct counter after change size of list
-            */
-            if ( math.mod( counter, customListSize ) != 0 ) {
-                counter -= math.mod( counter, customListSize );
-            }
-
             return [SELECT Name, First_Name__c, Last_Name__c, City__c, State_Province__c, Phone__c
                     FROM Candidate__c
-                    LIMIT: customListSize
-                    OFFSET: counter];
+                    LIMIT: this.customListSize
+                    OFFSET: this.counter];
         }
     }
 
     // Set the total size in the constructor
     public CandidatePagination () {
-        totalSize           = [SELECT count() FROM Candidate__c];
-        counter             = 0;
-        customListSize      = LIST_SIZE;
+        this.totalSize      = [SELECT count() FROM Candidate__c];
+        this.counter        = 0;
+        this.customListSize = LIST_SIZE;
     }
 
     // User clicked beginning
     public PageReference toBeginning () {
-        counter = 0;
+        this.counter = 0;
         return null;
     }
 
     // User clicked previous button
     public PageReference toPrevious () {
-        counter -= customListSize;
+        this.counter -= this.customListSize;
         return null;
     }
 
     // User clicked next button
     public PageReference toNext () {
-        counter += customListSize;
+        this.counter += this.customListSize;
         return null;
     }
 
@@ -50,19 +59,19 @@ public with sharing class CandidatePagination {
         Add condition to check if last page list is less than custom size list
     */
     public PageReference toEnd () {
-        Integer mod = math.mod( totalSize, customListSize );
-        counter = mod != 0 ? totalSize - mod : totalSize - customListSize;
+        Integer mod = math.mod( this.totalSize, this.customListSize );
+        this.counter     = mod != 0 ? this.totalSize - mod : this.totalSize - this.customListSize;
         return null;
     }
 
     // This will disable the previous and beginning buttons
     public Boolean getDisablePrevious () {
-        return counter > 0 ? false : true;
+        return this.counter > 0 ? false : true;
     }
 
     // This will disable the next and end buttons
     public Boolean getDisableNext () {
-        if ( counter + customListSize < totalSize ) {
+        if ( this.counter + this.customListSize < this.totalSize ) {
             return false;
         } else {
             return true;
@@ -70,6 +79,6 @@ public with sharing class CandidatePagination {
     }
 
     public Integer getCurrentPage () {
-        return counter / customListSize + 1;
+        return this.counter / this.customListSize + 1;
     }
 }
