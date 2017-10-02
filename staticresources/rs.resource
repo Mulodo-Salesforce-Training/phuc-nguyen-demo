@@ -1,11 +1,11 @@
 function getRemoteAccount () {
-    var firstName       = document.getElementById('firstName').value;
-    var lastName        = document.getElementById('lastName').value;
-    var email           = document.getElementById('email').value;
-    var phone           = document.getElementById('phone').value;
-    var street          = document.getElementById('street').value;
-    var city            = document.getElementById('city').value;
-    var stateProvince   = document.getElementById('stateProvince').value;
+    let firstName     = document.getElementById('firstName').value;
+    let lastName      = document.getElementById('lastName').value;
+    let email         = document.getElementById('email').value;
+    let phone         = document.getElementById('phone').value;
+    let street        = document.getElementById('street').value;
+    let city          = document.getElementById('city').value;
+    let stateProvince = document.getElementById('stateProvince').value;
 
     Visualforce.remoting.Manager.invokeAction (
         'CandidateRegister.toRegister',
@@ -13,13 +13,21 @@ function getRemoteAccount () {
         function ( result, event ) {
             if ( event.status ) {
                 if ( event.result == firstName ) {
-                    document.getElementById( "responseResult" ).innerHTML = "Create success Candidates with first name: " + firstName;
+                    success();
                 } else {
-                    document.getElementById( "responseResult" ).innerHTML = event.result + "<br/>";
+                    fail();
                 }
             }
         }, {
             escape: true
         }
     );
+
+    function success () {
+        document.getElementById( "responseResult" ).innerHTML = "Create success Candidates with first name: " + firstName;
+    }
+
+    function fail () {
+        document.getElementById( "responseResult" ).innerHTML = event.result + "<br/>";
+    }
 }
