@@ -12,7 +12,7 @@ function addNewCandidate () {
         firstName, lastName, email, phone, street, city, stateProvince,
         function ( result, event ) {
             if ( event.status ) {
-                if ( event.result == firstName ) {
+                if ( event.result === firstName ) {
                     success();
                 } else {
                     fail();

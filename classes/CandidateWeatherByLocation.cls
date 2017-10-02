@@ -8,10 +8,7 @@ public class CandidateWeatherByLocation {
             String format          = 'https://api.openweathermap.org/data/2.5/weather?'
                                    + 'q={0}&'
                                    + 'appid={1}';
-            List< String > filters = new String[]{
-                this.location,
-                appId
-            };
+            List< String > filters = new String[]{ this.location, appId };
 
             String restUrl         = String.format( format, filters );
             String method          = 'GET';
@@ -24,8 +21,9 @@ public class CandidateWeatherByLocation {
     }
 
     public CandidateWeatherByLocation () {
-        ID id         = ApexPages.currentPage().getParameters().get( 'id' );
-        this.location = [SELECT City__c FROM Candidate__c WHERE id = : id].City__c;
+        ID id          = ApexPages.currentPage().getParameters().get( 'id' );
+        Candidate__c c = [SELECT City__c FROM Candidate__c WHERE id =: id LIMIT 1];
+        this.location  = c.City__c;
     }
 
     // Define object for weather repsone
@@ -62,7 +60,7 @@ public class CandidateWeatherByLocation {
                 return ( Integer ) temp / 10;
             }
             set;
-        } //279.15
+        }
         public Integer pressure { get; }
         public Integer humidity { get; }
         public Double temp_min  { get; }
