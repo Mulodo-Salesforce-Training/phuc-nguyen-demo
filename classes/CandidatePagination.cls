@@ -83,6 +83,6 @@ public class CandidatePagination {
     }
 
     public Integer getCurrentPage () {
-        return this.counter / ( this.customListSize + 1 );
+        return ( this.counter / this.customListSize ) + 1;
     }
 }
