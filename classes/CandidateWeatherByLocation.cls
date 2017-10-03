@@ -5,15 +5,13 @@ public class CandidateWeatherByLocation {
             Utils utils            = new Utils();
 
             String appId           = 'ea77eec72392d5163c6c06be812dff37';
-            String format          = 'https://api.openweathermap.org/data/2.5/weather?'
-                                   + 'q={0}&'
-                                   + 'appid={1}';
+            String format          = 'https://api.openweathermap.org/data/2.5/weather?' + 'q={0}&' + 'appid={1}';
             List< String > filters = new String[]{ this.location, appId };
 
             String restUrl         = String.format( format, filters );
             String method          = 'GET';
             // Using get method and no need to use author so define as null
-            String author, body    = null;
+            String author, body    = '';
             // Deserialize obtained json res
             String res             = utils.execRestApi( restUrl, method, author, body );
             return ( WeatherInfoDao ) JSON.deserialize( res, WeatherInfoDao.class );
@@ -22,7 +20,7 @@ public class CandidateWeatherByLocation {
 
     public CandidateWeatherByLocation () {
         ID id          = ApexPages.currentPage().getParameters().get( 'id' );
-        Candidate__c c = [SELECT City__c FROM Candidate__c WHERE id =: id LIMIT 1];
+        Candidate__c c = [SELECT City__c FROM Candidate__c WHERE Candidate__c.Id =: id LIMIT 1];
         this.location  = c.City__c;
     }
 
