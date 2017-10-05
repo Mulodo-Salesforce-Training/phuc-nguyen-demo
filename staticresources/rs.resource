@@ -32,57 +32,29 @@ function addNewCandidate () {
     }
 }
 
-// create an factory to excute
 var app = angular.module( 'MyApp', [] );
-app.factory( 'VFRemotingFactory', function( $q, $rootScope ) {
-    var factory = {};
-    factory.getData = function( searchText ) {
-        var deferred = $q.defer();
-        GetAllAccountsByFilter( searchText, function( result ) {
-            $rootScope.$apply( function() {
-                deferred.resolve( result );
-            });
-        } );
-        return deferred.promise;
-    }
-    return factory;
-});
-
-// get data from remote action method in controller
-function GetAllAccountsByFilter( searchText, callback ) {
-
-    if( searchText == undefined ) {
-        searchText = '';
-    }
-
+app.controller( 'myController', function( $scope ) {
+    $scope.mcm             = {};
+    var searchText         = '';
+    $scope.getFilteredData = function( $event ) {
+        searchText         = $scope.mcm.searchText;
+        Visualforce.remoting.Manager.invokeAction(
+            'CustomAccountController.GetAllAccountsByFilter', searchText,
+            function( result, event ) {
+                $scope.$apply( function() {
+                    $scope.AccountData = result;
+                });
+            },
+            { escape : false }
+        );
+    };
     Visualforce.remoting.Manager.invokeAction(
         'CustomAccountController.GetAllAccountsByFilter', searchText,
-            callback,
-        { escape: false }
+        function( result, event ) {
+            $scope.$apply( function() {
+                $scope.AccountData = result;
+            });
+        },
+        { escape : false }
     );
-}
-
-// controller process page
-app.controller( 'myController', function( $scope, VFRemotingFactory ) {
-    $scope.mcm = {};
-    $scope.getFilteredData = function( $event ) {
-
-        if ( $scope.mcm.searchText.length > 1 ) {
-            var searchText         = $scope.mcm.searchText;
-            VFRemotingFactory.getData( searchText ).then( function( result ) {
-                $scope.AccountData = result;
-            });
-        }
-        else {
-            var searchText         = $scope.mcm.searchText;
-            VFRemotingFactory.getData().then( function( result ) {
-                $scope.AccountData = result;
-            });
-        }
-
-    };
-    $scope.Prafull         = {};
-    VFRemotingFactory.getData().then( function( result ) {
-        $scope.AccountData = result;
-    });
 });
