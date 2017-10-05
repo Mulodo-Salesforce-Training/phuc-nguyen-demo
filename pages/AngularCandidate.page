@@ -25,6 +25,11 @@
 		<div ng-app="listCandidate">
             <div ng-controller="listCandidateCtrl">
                 <label>Search: <input ng-model="mcm.searchText" ng-keyup="getFilteredData( $event )" class="slds-input slds-m-bottom_x-small slds-p-horizontal_small slds-size_1-of-4" placeholder="Searching by first name" /></label>
+                <button class="slds-button slds-button_neutral">
+                    <a href="{!URLFOR($Action.Candidate__c.New)}">
+                        Create New Candidate
+                    </a>
+                </button>
                 <table class="slds-table slds-table_bordered slds-table_cell-buffer">
                     <thead>
                         <tr class="slds-text-title_caps">
