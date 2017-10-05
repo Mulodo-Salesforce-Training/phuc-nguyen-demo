@@ -11,7 +11,7 @@ private class CandidateRegisterTest {
             // Implement test code
             String name          = CandidateRegister.toRegister( firstName, lastName, email, phone, street, city, stateProvince );
             System.assertEquals( 'phuc', name );
-            name = CandidateRegister.toRegister( null, lastName, email, phone, street, city, stateProvince );
+            name                 = CandidateRegister.toRegister( null, lastName, email, phone, street, city, stateProvince );
             System.assertNotEquals( 'phuc', name );
     }
 }

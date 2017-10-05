@@ -1,4 +1,4 @@
-public class CandidatePagination {
+public with sharing class CandidatePagination {
     // the size of list per page as default
     // custom size of list per page will be changed by user
     final Integer LIST_SIZE = 9;
