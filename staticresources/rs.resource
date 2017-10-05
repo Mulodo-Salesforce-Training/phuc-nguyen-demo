@@ -31,3 +31,58 @@ function addNewCandidate () {
         document.getElementById( "responseResult" ).innerHTML = event.result + "<br/>";
     }
 }
+
+// create an factory to excute
+var app = angular.module( 'MyApp', [] );
+app.factory( 'VFRemotingFactory', function( $q, $rootScope ) {
+    var factory = {};
+    factory.getData = function( searchText ) {
+        var deferred = $q.defer();
+        GetAllAccountsByFilter( searchText, function( result ) {
+            $rootScope.$apply( function() {
+                deferred.resolve( result );
+            });
+        } );
+        return deferred.promise;
+    }
+    return factory;
+});
+
+// get data from remote action method in controller
+function GetAllAccountsByFilter( searchText, callback ) {
+
+    if( searchText == undefined ) {
+        searchText = '';
+    }
+
+    Visualforce.remoting.Manager.invokeAction(
+        'CustomAccountController.GetAllAccountsByFilter', searchText,
+            callback,
+        { escape: false }
+    );
+}
+
+// controller process page
+app.controller( 'myController', function( $scope, VFRemotingFactory ) {
+    $scope.mcm = {};
+    $scope.getFilteredData = function( $event ) {
+
+        if ( $scope.mcm.searchText.length > 1 ) {
+            var searchText         = $scope.mcm.searchText;
+            VFRemotingFactory.getData( searchText ).then( function( result ) {
+                $scope.AccountData = result;
+            });
+        }
+        else {
+            var searchText         = $scope.mcm.searchText;
+            VFRemotingFactory.getData().then( function( result ) {
+                $scope.AccountData = result;
+            });
+        }
+
+    };
+    $scope.Prafull         = {};
+    VFRemotingFactory.getData().then( function( result ) {
+        $scope.AccountData = result;
+    });
+});

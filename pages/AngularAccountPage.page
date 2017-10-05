@@ -4,91 +4,36 @@
             <!-- Link to angular lib -->
             <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js" />
             <meta charset="utf-8" />
-	        <meta http-equiv="x-ua-compatible" content="ie=edge" />
-	        <title>Angular Accounts List</title>
-	        <meta name="viewport" content="width=device-width, initial-scale=1" />
-	        <!-- Import the Design System style sheet -->
-	        <apex:slds />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <title>Angular Accounts List</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <!-- Import the Design System style sheet -->
+            <apex:slds />
+            <apex:includeScript value="{!URLFOR($Resource.rs)}" />
         </head>
         <body>
-        	<!-- REQUIRED SLDS WRAPPER -->
-        	<div class="slds-scope">
-	            <div ng-app="MyApp">
-	                <div ng-controller="myController">
-	                    <label>Search: <input ng-model="mcm.searchText" ng-keyup="getFilteredData( $event )" class="slds-input" placeholder="Text to filter result - Single page real time - Angular is good" /></label>
-	                    <table class="table">
-	                        <thead>
-	                            <tr>
-	                                <th>Account Name</th>
-	                                <th>Account Number</th>
-	                            </tr>
-	                        </thead>
-	                        <tbody>
-	                            <tr ng-repeat="accVar in AccountData">
-	                                <td>{{accVar.Name}}</td>
-	                                <td>{{accVar.AccountNumber}}</td>
-	                            </tr>
-	                        </tbody>
-	                    </table>
-	                </div>
-	            </div>
-	        </div>
-            <script type="text/javascript">
-                // create an factory to excute
-                var app = angular.module( 'MyApp', [] );
-                app.factory( 'VFRemotingFactory', function( $q, $rootScope ) {
-                    var factory = {};
-                    factory.getData = function( searchText ) {
-                        var deferred = $q.defer();
-                        GetAllAccountsByFilter( searchText, function( result ) {
-                            $rootScope.$apply( function() {
-                                deferred.resolve( result );
-                            });
-                        } );
-                        return deferred.promise;
-                    }
-                    return factory;
-                });
-
-                // get data from remote action method in controller
-                function GetAllAccountsByFilter( searchText, callback ) {
-
-                    if( searchText == undefined ) {
-                        searchText = '';
-                    }
-
-                    Visualforce.remoting.Manager.invokeAction(
-                        '{!$RemoteAction.CustomAccountController.GetAllAccountsByFilter}',searchText,
-                            callback,
-                        { escape: false }
-                    );
-                }
-
-                // controller process page
-                app.controller( 'myController', function( $scope, VFRemotingFactory ) {
-                    $scope.mcm = {};
-                    $scope.getFilteredData = function( $event ) {
-
-                        if ( $scope.mcm.searchText.length > 1 ) {
-                            var searchText = $scope.mcm.searchText;
-                            VFRemotingFactory.getData( searchText ).then( function( result ) {
-                                $scope.AccountData = result;
-                            });
-                        }
-                        else {
-                            var searchText = $scope.mcm.searchText;
-                            VFRemotingFactory.getData().then( function( result ) {
-                                $scope.AccountData = result;
-                            });
-                        }
-
-                    };
-                    $scope.Prafull = {};
-                    VFRemotingFactory.getData().then( function( result ) {
-                        $scope.AccountData = result;
-                    });
-                });
-            </script>
+            <!-- REQUIRED SLDS WRAPPER -->
+            <div class="slds-scope">
+                <div ng-app="MyApp">
+                    <div ng-controller="myController">
+                        <label>Search: <input ng-model="mcm.searchText" ng-keyup="getFilteredData( $event )" class="slds-input" placeholder="Text to filter result - Single page real time - Angular is good" /></label>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Account Name</th>
+                                    <th>Account Number</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="accVar in AccountData">
+                                    <td>{{accVar.Name}}</td>
+                                    <td>{{accVar.AccountNumber}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </body>
     </html>
 </apex:page>
