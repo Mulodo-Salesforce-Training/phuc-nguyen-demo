@@ -1,39 +1,35 @@
-<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="true" applyBodyTag="false" docType="html-5.0"  controller="CustomAccountController">
-    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
-        <head>
-            <!-- Link to angular lib -->
-            <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js" />
-            <meta charset="utf-8" />
-            <meta http-equiv="x-ua-compatible" content="ie=edge" />
-            <title>Angular Accounts List</title>
-            <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <!-- Import the Design System style sheet -->
-            <apex:slds />
-            <apex:includeScript value="{!URLFOR($Resource.rs)}" />
-        </head>
-        <body>
-            <!-- REQUIRED SLDS WRAPPER -->
-            <div class="slds-scope">
-                <div ng-app="MyApp">
-                    <div ng-controller="myController">
-                        <label>Search: <input ng-model="mcm.searchText" ng-keyup="getFilteredData( $event )" class="slds-input" placeholder="Text to filter result - Single page real time - Angular is good" /></label>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Account Name</th>
-                                    <th>Account Number</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="accVar in AccountData">
-                                    <td>{{accVar.Name}}</td>
-                                    <td>{{accVar.AccountNumber}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+<apex:page showHeader="true" sidebar="true" standardStylesheets="false" applyHtmlTag="true" applyBodyTag="true" docType="html-5.0"  controller="CustomAccountController">
+    <head>
+        <!-- Link to angular lib -->
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js" />
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>Angular Accounts List</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Import the Design System style sheet -->
+        <apex:slds />
+        <apex:includeScript value="{!URLFOR($Resource.rs)}" />
+    </head>
+    <!-- REQUIRED SLDS WRAPPER -->
+    <div class="slds-scope">
+        <div ng-app="MyApp">
+            <div ng-controller="myController">
+                <label>Search: <input ng-model="mcm.searchText" ng-keyup="getFilteredData( $event )" class="slds-input" placeholder="Text to filter result - Single page real time - Angular is good" /></label>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Account Name</th>
+                            <th>Account Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="accVar in AccountData">
+                            <td>{{accVar.Name}}</td>
+                            <td>{{accVar.AccountNumber}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </body>
-    </html>
+        </div>
+    </div>
 </apex:page>

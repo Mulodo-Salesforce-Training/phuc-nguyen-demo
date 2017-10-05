@@ -58,3 +58,46 @@ app.controller( 'myController', function( $scope ) {
         { escape : false }
     );
 });
+
+var appCan = angular.module( 'listCandidate', [] );
+appCan.controller( 'listCandidateCtrl', function ( $scope ) {
+    $scope.mcm             = {};
+    var searchText         = '';
+
+    Visualforce.remoting.Manager.invokeAction (
+        'CustomCandidateController.getListCandidates', searchText,
+        function ( result, event ) {
+            $scope.$apply(function() {
+                $scope.CandidateData = result;
+            });
+        },
+        { escape : false }
+    );
+
+    $scope.getFilteredData = function ( $event ) {
+        searchText = $scope.mcm.searchText;
+        Visualforce.remoting.Manager.invokeAction(
+            'CustomCandidateController.getListCandidates', searchText,
+            function ( result, event ) {
+                $scope.$apply( function() {
+                    $scope.CandidateData = result;
+                });
+            },
+            { escape : false }
+        );
+    };
+
+    $scope.remove = function ( id ) {
+        Visualforce.remoting.Manager.invokeAction(
+            'CustomCandidateController.removeCandidate', id, searchText,
+            function( result, event ) {
+                if ( event.status ) {
+                    $scope.$apply( function() {
+                        $scope.CandidateData = result;
+                    });
+                }
+            },
+            { escape : false }
+        );
+    };
+});

@@ -1,0 +1,65 @@
+<apex:page showHeader="true" sidebar="true" standardStylesheets="false" applyHtmlTag="true" applyBodyTag="true" docType="html-5.0"  controller="CustomCandidateController">
+    <head>
+    	<!-- Link to angular lib -->
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js" />
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>Angular Candidates List</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Import the Design System style sheet -->
+        <apex:slds />
+        <apex:includeScript value="{!URLFOR($Resource.rs)}" />
+    </head>
+	<!-- REQUIRED SLDS WRAPPER -->
+    <div class="slds-scope">
+		<div class="slds-grid">
+			<div class="slds-p-horizontal_small slds-size_3-of-8 slds-align_absolute-center">
+				<img src="{!URLFOR($Resource.Mulodo_Logo, 'mulodo.jpg')}" alt="logo" />
+			</div>
+			<div class="slds-p-horizontal_small slds-size_5-of-8 slds-align_absolute-center">
+				<div class="slds-text-heading_large">
+					CANDIDATE CONTROL
+				</div>
+			</div>
+		</div>
+		<div ng-app="listCandidate">
+            <div ng-controller="listCandidateCtrl">
+                <label>Search: <input ng-model="mcm.searchText" ng-keyup="getFilteredData( $event )" class="slds-input slds-m-bottom_x-small slds-p-horizontal_small slds-size_1-of-4" placeholder="Searching by first name" /></label>
+                <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                    <thead>
+                        <tr class="slds-text-title_caps">
+                            <th scope="col">
+                                <div class="slds-truncate" title="Candidate FName">Candidate FName</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Candidate LName">Candidate LName</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="City">City</div>
+                            </th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="canVar in CandidateData">
+                            <td data-label="FirstName">
+                                <div class="slds-truncate" title="FirstName">{{canVar.First_Name__c}}</div>
+                            </td>
+                            <td data-label="LastName">
+                                <div class="slds-truncate" title="LastName">{{canVar.Last_Name__c}}</div>
+                            </td>
+                            <td data-label="City">
+                                <div class="slds-truncate" title="City">{{canVar.City__c}}</div>
+                            </td>
+                            <td data-label="Remove">
+                                <div class="slds-truncate">
+                                    <button class="slds-button slds-button_destructive" ng-click="remove( canVar.Id )">Remove</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+	</div>
+</apex:page>
