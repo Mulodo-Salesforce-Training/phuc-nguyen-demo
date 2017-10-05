@@ -64,15 +64,17 @@ appCan.controller( 'listCandidateCtrl', function ( $scope ) {
     $scope.mcm             = {};
     var searchText         = '';
 
-    Visualforce.remoting.Manager.invokeAction (
-        'CustomCandidateController.getListCandidates', searchText,
-        function ( result, event ) {
-            $scope.$apply(function() {
-                $scope.CandidateData = result;
-            });
-        },
-        { escape : false }
-    );
+    $scope.initData = function () {
+        Visualforce.remoting.Manager.invokeAction (
+            'CustomCandidateController.getListCandidates', searchText,
+            function ( result, event ) {
+                $scope.$apply(function() {
+                    $scope.CandidateData = result;
+                });
+            },
+            { escape : false }
+        );
+    }
 
     $scope.getFilteredData = function ( $event ) {
         searchText = $scope.mcm.searchText;
