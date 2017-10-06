@@ -1,103 +1,46 @@
-<apex:page docType="html-5.0" controller="CandidateRegister">
-    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
-
+<apex:page showHeader="true" sidebar="true" standardStylesheets="false" applyHtmlTag="true" applyBodyTag="true" docType="html-5.0"  controller="CandidateRegister">
     <head>
+        <!-- Link to angular lib -->
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js" />
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>Candidates New</title>
+        <title>Candidate Register</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- Import the Design System style sheet -->
         <apex:slds />
-        <apex:includeScript value="{!URLFOR($Resource.rs)}"/>
+        <apex:includeScript value="{!URLFOR( $Resource.rs )}" />
     </head>
-
-    <body>
-        <!-- REQUIRED SLDS WRAPPER -->
-        <div class="slds-scope">
-            <div class="slds-align_absolute-center slds-text-heading_large" style="color: #5ADBFF;">Candidates New</div>
-            <div id="responseResult"></div>
-            <div class="slds-form slds-form_stacked">
-                <div class="slds-form-element">
-                    <label class="slds-form-element__label">First Name <span style="color: red">*</span>
+    <!-- REQUIRED SLDS WRAPPER -->
+    <div class="slds-scope">
+        <!-- Register form -->
+        <div ng-app="CandidateRegister">
+            <div ng-controller="CandidateRegisterCtrl">
+                <span ng-bind="errorMessage" style="color: red;"></span>
+                <form ng-submit="submit();">
+                    <label class="slds-form-element__label" for="First_Name__c">
+                        First Name
+                        <input type="text" ng-model="Candidate__c.First_Name__c" />
                     </label>
-                    <div class="slds-form-element__control">
-                        <input type="text" class="slds-input" id="firstName" name="firstName" />
-                    </div>
-                </div>
-                <div class="slds-form-element">
-                    <label class="slds-form-element__label">Last Name <span style="color: red">*</span>
+                    <label class="slds-form-element__label" for="Last_Name__c">
+                        Last Name
+                        <input type="text" ng-model="Candidate__c.Last_Name__c" />
                     </label>
-                    <div class="slds-form-element__control">
-                        <input type="text" class="slds-input" id="lastName" name="lastName" />
-                    </div>
-                </div>
-                <div class="slds-form-element">
-                    <label class="slds-form-element__label">Email <span style="color: red">*</span>
+                    <label class="slds-form-element__label" for="City__c">
+                        City
+                        <input type="text" ng-model="Candidate__c.City__c" />
                     </label>
-                    <div class="slds-form-element__control">
-                        <input type="email" class="slds-input" id="email" name="email" />
-                    </div>
-                </div>
-                <div class="slds-form-element">
-                    <label class="slds-form-element__label">Phone <span style="color: red">*</span>
+                    <label class="slds-form-element__label" for="Email__c">
+                        Email
+                        <input type="email" ng-model="Candidate__c.Email__c" />
                     </label>
-                    <div class="slds-form-element__control">
-                        <input type="number" class="slds-input" id="phone" name="phone" />
-                    </div>
-                </div>
-                <div class="slds-form-element">
-                    <label class="slds-form-element__label">Street</label>
-                    <div class="slds-form-element__control">
-                        <input type="text" class="slds-input" id="street" name="street" />
-                    </div>
-                </div>
-                <div class="slds-form-element">
-                    <label class="slds-form-element__label">City</label>
-                    <div class="slds-form-element__control">
-                        <input type="text" class="slds-input" id="city" name="city" />
-                    </div>
-                </div>
-                <div class="slds-form-element">
-                    <label class="slds-form-element__label">State/Province</label>
-                    <div class="slds-form-element__control">
-                        <input type="text" class="slds-input" id="stateProvince" name="stateProvince" />
-                    </div>
-                </div>
-                <div class="slds-form-element">
-                    <label class="slds-form-element__label">Country</label>
-                    <div class="slds-form-element__control">
-                        <div class="slds-select_container">
-                            <select class="slds-select">
-                                <option>Option One</option>
-                                <option>Option Two</option>
-                                <option>Option Three</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="slds-form-element">
-                    <label class="slds-form-element__label">Birthday</label>
-                    <div class="slds-form-element__control">
-                        <input type="date" class="slds-input" name="birthday" />
-                    </div>
-                </div>
-                <div class="slds-form-element">
-                    <div class="slds-form-element__control">
-                        <span class="slds-checkbox">
-                        <input type="checkbox" name="currentEmployed" value="on" />
-                        <label class="slds-checkbox__label">
-                        <span class="slds-checkbox_faux"></span>
-                        <span class="slds-form-element__label">Currently Employed</span>
-                        </label>
-                        </span>
-                    </div>
-                </div>
-                <div class="slds-form-element">
-                    <button class="slds-button slds-button_neutral" onclick="addNewCandidate();">Resister New</button>
-                </div>
+                    <label class="slds-form-element__label" for="Phone__c">
+                        Phone
+                        <input type="text" ng-model="Candidate__c.Phone__c" />
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
             </div>
         </div>
-    </body>
-
-    </html>
+        <!-- End Register form -->
+    </div>
 </apex:page>

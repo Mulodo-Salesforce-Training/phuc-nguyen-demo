@@ -48,7 +48,7 @@ app.controller( 'myController', function( $scope ) {
     }
 
     $scope.initData = function () {
-        Visualforce.remoting.Manager.invokeAction(
+        Visualforce.remoting.Manager.invokeAction (
             'CustomAccountController.GetAllAccountsByFilter', searchText,
             callback,
             { escape : false }
@@ -57,7 +57,7 @@ app.controller( 'myController', function( $scope ) {
 
     $scope.getFilteredData = function( $event ) {
         searchText         = $scope.mcm.searchText;
-        Visualforce.remoting.Manager.invokeAction(
+        Visualforce.remoting.Manager.invokeAction (
             'CustomAccountController.GetAllAccountsByFilter', searchText,
             callback,
             { escape : false }
@@ -90,7 +90,7 @@ appCan.controller( 'listCandidateCtrl', function ( $scope, $window ) {
 
     $scope.getFilteredData = function ( $event ) {
         searchText = $scope.mcm.searchText;
-        Visualforce.remoting.Manager.invokeAction(
+        Visualforce.remoting.Manager.invokeAction (
             'CustomCandidateController.getListCandidates', searchText,
             callback,
             { escape : false }
@@ -98,7 +98,7 @@ appCan.controller( 'listCandidateCtrl', function ( $scope, $window ) {
     };
 
     $scope.remove = function ( id ) {
-        Visualforce.remoting.Manager.invokeAction(
+        Visualforce.remoting.Manager.invokeAction (
             'CustomCandidateController.removeCandidate', id, searchText,
             callback,
             { escape : false }
@@ -107,5 +107,44 @@ appCan.controller( 'listCandidateCtrl', function ( $scope, $window ) {
 
     $scope.createNewCandidate = function () {
         $window.location.href = ('Candidate_Lightning_New');
+    };
+});
+
+var appCan = angular.module( 'CandidateRegister', [] );
+appCan.controller( 'CandidateRegisterCtrl', function ( $scope ) {
+    function Candidate__c () {
+        this.Id            = null;
+        this.First_Name__c = null;
+        this.Last_Name__c  = null;
+        this.Email__c      = null;
+        this.City__c       = null;
+        this.Phone__c      = null;
+    };
+
+    function callback ( result, event )  {
+        $scope.$apply( function() {
+            $scope.Candidate__c.First_Name__c = '';
+            $scope.Candidate__c.Last_Name__c  = '';
+            $scope.Candidate__c.Email__c      = '';
+            $scope.Candidate__c.City__c       = '';
+            $scope.Candidate__c.Phone__c      = '';
+            $scope.errorMessage               = result;
+        });
+    };
+
+    $scope.submit = function () {
+        let candidate           = new Candidate__c();
+
+        candidate.First_Name__c = $scope.Candidate__c.First_Name__c;
+        candidate.Last_Name__c  = $scope.Candidate__c.Last_Name__c;
+        candidate.Email__c      = $scope.Candidate__c.Email__c;
+        candidate.City__c       = $scope.Candidate__c.City__c;
+        candidate.Phone__c      = $scope.Candidate__c.Phone__c;
+
+        Visualforce.remoting.Manager.invokeAction (
+            'CandidateRegister.toRegister', candidate,
+            callback,
+            { escape : false }
+        );
     };
 });

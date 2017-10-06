@@ -1,28 +1,12 @@
 public with sharing class CandidateRegister {
     @RemoteAction
-    public static String toRegister ( String firstName,
-                                      String lastName,
-                                      String email,
-                                      String phone,
-                                      String street,
-                                      String city,
-                                      String stateProvince ) {
-        Candidate__c candidate      = new Candidate__c();
-
-        candidate.First_Name__c     = firstName;
-        candidate.Last_Name__c      = lastName;
-        candidate.Email__c          = email;
-        candidate.Phone__c          = phone;
-        candidate.Street__c         = street;
-        candidate.City__c           = city;
-        candidate.State_Province__c = stateProvince;
-
+    public static String toRegister ( Candidate__c candidate ) {
         try {
             insert candidate;
         } catch ( DmlException ex ) {
+        	System.debug( ex.getMessage() );
             return ex.getMessage();
         }
-
-        return firstName;
+        return candidate.Id;
     }
 }
