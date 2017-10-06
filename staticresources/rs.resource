@@ -66,7 +66,7 @@ app.controller( 'myController', function( $scope ) {
 });
 
 var appCan = angular.module( 'listCandidate', [] );
-appCan.controller( 'listCandidateCtrl', function ( $scope ) {
+appCan.controller( 'listCandidateCtrl', function ( $scope, $window ) {
     $scope.mcm             = {};
     var searchText         = '';
 
@@ -103,5 +103,9 @@ appCan.controller( 'listCandidateCtrl', function ( $scope ) {
             callback,
             { escape : false }
         );
+    };
+
+    $scope.createNewCandidate = function () {
+        $window.location.href = ('Candidate_Lightning_New');
     };
 });
