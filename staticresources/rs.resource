@@ -36,27 +36,33 @@ var app = angular.module( 'MyApp', [] );
 app.controller( 'myController', function( $scope ) {
     $scope.mcm             = {};
     var searchText         = '';
+
+    function callback ( result, event ) {
+
+        if ( event.status ) {
+            $scope.$apply( function() {
+                $scope.AccountData = result;
+            });
+        }
+
+    }
+
+    $scope.initData = function () {
+        Visualforce.remoting.Manager.invokeAction(
+            'CustomAccountController.GetAllAccountsByFilter', searchText,
+            callback,
+            { escape : false }
+        );
+    }
+
     $scope.getFilteredData = function( $event ) {
         searchText         = $scope.mcm.searchText;
         Visualforce.remoting.Manager.invokeAction(
             'CustomAccountController.GetAllAccountsByFilter', searchText,
-            function( result, event ) {
-                $scope.$apply( function() {
-                    $scope.AccountData = result;
-                });
-            },
+            callback,
             { escape : false }
         );
     };
-    Visualforce.remoting.Manager.invokeAction(
-        'CustomAccountController.GetAllAccountsByFilter', searchText,
-        function( result, event ) {
-            $scope.$apply( function() {
-                $scope.AccountData = result;
-            });
-        },
-        { escape : false }
-    );
 });
 
 var appCan = angular.module( 'listCandidate', [] );
@@ -64,14 +70,20 @@ appCan.controller( 'listCandidateCtrl', function ( $scope ) {
     $scope.mcm             = {};
     var searchText         = '';
 
+    function callback ( result, event ) {
+
+        if ( event.status ) {
+            $scope.$apply( function() {
+                $scope.CandidateData = result;
+            });
+        }
+
+    }
+
     $scope.initData = function () {
         Visualforce.remoting.Manager.invokeAction (
             'CustomCandidateController.getListCandidates', searchText,
-            function ( result, event ) {
-                $scope.$apply(function() {
-                    $scope.CandidateData = result;
-                });
-            },
+            callback,
             { escape : false }
         );
     }
@@ -80,11 +92,7 @@ appCan.controller( 'listCandidateCtrl', function ( $scope ) {
         searchText = $scope.mcm.searchText;
         Visualforce.remoting.Manager.invokeAction(
             'CustomCandidateController.getListCandidates', searchText,
-            function ( result, event ) {
-                $scope.$apply( function() {
-                    $scope.CandidateData = result;
-                });
-            },
+            callback,
             { escape : false }
         );
     };
@@ -92,13 +100,7 @@ appCan.controller( 'listCandidateCtrl', function ( $scope ) {
     $scope.remove = function ( id ) {
         Visualforce.remoting.Manager.invokeAction(
             'CustomCandidateController.removeCandidate', id, searchText,
-            function( result, event ) {
-                if ( event.status ) {
-                    $scope.$apply( function() {
-                        $scope.CandidateData = result;
-                    });
-                }
-            },
+            callback,
             { escape : false }
         );
     };

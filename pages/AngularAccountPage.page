@@ -13,7 +13,7 @@
     <!-- REQUIRED SLDS WRAPPER -->
     <div class="slds-scope">
         <div ng-app="MyApp">
-            <div ng-controller="myController">
+            <div ng-controller="myController" ng-init="initData();">
                 <label>Search: <input ng-model="mcm.searchText" ng-keyup="getFilteredData( $event )" class="slds-input" placeholder="Text to filter result - Single page real time - Angular is good" /></label>
                 <table class="table">
                     <thead>

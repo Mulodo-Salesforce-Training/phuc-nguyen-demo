@@ -1,9 +1,7 @@
 public class CustomCandidateController {
-	public static Integer listSize = 9, counter, totalSize, customListSize;
-
 	@RemoteAction
 	public static List<Candidate__c> getListCandidates ( String searchText ) {
-		String searchString = '%' + searchText + '%';
+		String searchString              = '%' + searchText + '%';
 		List<Candidate__c> listCandidate = [SELECT Id, City__c, First_Name__c, Last_Name__c FROM Candidate__c WHERE First_Name__c LIKE :searchString];
 		return listCandidate;
 	}
