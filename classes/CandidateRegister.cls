@@ -4,7 +4,6 @@ public with sharing class CandidateRegister {
         try {
             insert candidate;
         } catch ( DmlException ex ) {
-        	System.debug( ex.getMessage() );
             return ex.getMessage();
         }
         return candidate.Id;

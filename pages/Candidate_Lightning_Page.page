@@ -100,7 +100,7 @@
                 <apex:pageBlock >
                     <apex:pageBlockButtons location="bottom">
                         <apex:outputPanel id="PaginationButton">
-                            <apex:form >
+                            <apex:form>
                                 <apex:commandButton action="{!toBeginning}" title="Beginning" value="First" disabled="{!disablePrevious}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
                                 <apex:commandButton action="{!toPrevious}" title="Previous" value="Prev" disabled="{!disablePrevious}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
                                 <apex:variable var="c" value="{!CurrentPage}">
