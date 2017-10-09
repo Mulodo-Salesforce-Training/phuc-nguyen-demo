@@ -86,7 +86,8 @@
 				</div>
 			</div>
 			<script type="text/javascript">
-				let app = angular.module( 'candidateSPA', [] );
+				let client_ip = document.getElementById('ip_address').value;
+				let app       = angular.module( 'candidateSPA', [] );
 				app.controller( 'candidateController', function( $scope, $interval, $http ) {
 					let tick = function() {
 	            		$scope.date = Date.now();
@@ -95,6 +96,8 @@
 					let test = function () {
 						Visualforce.remoting.Manager.invokeAction (
 				            '{!$RemoteAction.SPA_CandidateController.getCurrentCountry}',
+				            client_ip
+				            ,
 				            function ( result, event ) {
 				            	console.log( result );
 				            },
