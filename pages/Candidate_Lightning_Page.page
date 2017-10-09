@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- Import the Design System style sheet -->
         <apex:slds />
-        <apex:includeScript value="{!URLFOR($Resource.rs)}"/>
+        <apex:includeScript value="{!URLFOR($Resource.JavaScript)}"/>
     </head>
 
     <body>
@@ -100,7 +100,7 @@
                 <apex:pageBlock >
                     <apex:pageBlockButtons location="bottom">
                         <apex:outputPanel id="PaginationButton">
-                            <apex:form>
+                            <apex:form >
                                 <apex:commandButton action="{!toBeginning}" title="Beginning" value="First" disabled="{!disablePrevious}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
                                 <apex:commandButton action="{!toPrevious}" title="Previous" value="Prev" disabled="{!disablePrevious}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
                                 <apex:variable var="c" value="{!CurrentPage}">
@@ -108,6 +108,7 @@
                                 </apex:variable>
                                 <apex:commandButton action="{!toNext}" title="Next" value="Next" disabled="{!disableNext}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
                                 <apex:commandButton action="{!toEnd}" title="End" value="End" disabled="{!disableNext}" reRender="CandidateTable, PaginationButton" styleClass="slds-button slds-button_neutral" />
+                                <br/>
                             </apex:form>
                         </apex:outputPanel>
                     </apex:pageBlockButtons>

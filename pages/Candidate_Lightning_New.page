@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- Import the Design System style sheet -->
         <apex:slds />
-        <apex:includeScript value="{!URLFOR( $Resource.rs )}" />
+        <apex:includeScript value="{!URLFOR($Resource.JavaScript)}" />
     </head>
     <!-- REQUIRED SLDS WRAPPER -->
     <div class="slds-scope">

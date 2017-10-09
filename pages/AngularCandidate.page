@@ -8,13 +8,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- Import the Design System style sheet -->
         <apex:slds />
-        <apex:includeScript value="{!URLFOR($Resource.rs)}" />
+        <apex:includeScript value="{!URLFOR($Resource.JavaScript)}" />
     </head>
 	<!-- REQUIRED SLDS WRAPPER -->
     <div class="slds-scope">
 		<div class="slds-grid">
 			<div class="slds-p-horizontal_small slds-size_3-of-8 slds-align_absolute-center">
-				<img src="{!URLFOR($Resource.Mulodo_Logo, 'mulodo.jpg')}" alt="logo" />
+				<img src="{!URLFOR($Resource.Mulodo, 'mulodo.jpg')}" alt="logo" />
 			</div>
 			<div class="slds-p-horizontal_small slds-size_5-of-8 slds-align_absolute-center">
 				<div class="slds-text-heading_large">
@@ -24,7 +24,7 @@
 		</div>
 		<div ng-app="listCandidate">
             <div ng-controller="listCandidateCtrl" ng-init="initData();">
-                <label>Search: <input ng-model="mcm.searchText" ng-keyup="getFilteredData( $event )" class="slds-input slds-m-bottom_x-small slds-p-horizontal_small slds-size_1-of-4" placeholder="Searching by first name" /></label>
+                <label>Search: <input ng-model="mcm.searchText" ng-keyup="getFilteredData($event)" class="slds-input slds-m-bottom_x-small slds-p-horizontal_small slds-size_1-of-4" placeholder="Searching by first name" /></label>
                 <button class="slds-button slds-button_neutral" ng-click="createNewCandidate();">
                     Create New Candidate
                 </button>
@@ -56,7 +56,7 @@
                             </td>
                             <td data-label="Remove">
                                 <div class="slds-truncate">
-                                    <button class="slds-button slds-button_destructive" ng-click="remove( canVar.Id )">Remove</button>
+                                    <button class="slds-button slds-button_destructive" ng-click="remove(canVar.Id)">Remove</button>
                                 </div>
                             </td>
                         </tr>

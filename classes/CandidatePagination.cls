@@ -61,10 +61,10 @@ public with sharing class CandidatePagination {
     public PageReference toEnd () {
         Integer mod  = math.mod( this.totalSize, this.customListSize );
         // get the last counter of page right before the end
-        this.counter = mod != 0 ?
-                    ( this.totalSize - mod )                    // true
-                    :
-                    ( this.totalSize - this.customListSize );   // false
+        this.counter =  mod != 0 ?
+                        ( this.totalSize - mod )                    // true
+                        :
+                        ( this.totalSize - this.customListSize );   // false
         return null;
     }
 

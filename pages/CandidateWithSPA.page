@@ -1,0 +1,128 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" controller="SPA_CandidateController">
+	<html>
+		<head>
+	    	<!-- Link to angular lib -->
+	    	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	        <meta charset="UTF-8" />
+	        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+	        <title>SPA Candidate</title>
+	        <!-- Import the Design System style sheet -->
+	        <apex:slds />
+	        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js" />
+	    	<style>
+				* {
+					font-size   : 14px;
+				}
+
+				body {
+					margin      : 0px auto;
+					max-width   : 1000px;
+					padding     : 0px;
+				}
+
+				#logo img {
+					max-width : 150px;
+					height    : auto;
+				}
+
+				#brand {
+					margin      : auto auto;
+					color       : red;
+					font-size   : 35px;
+					font-style  : italic;
+				}
+
+				#header {
+					max-height : 150xp;
+				}
+
+				#info span {
+					font-weight : bold;
+					padding     : 5px;
+					border      : 1px solid black;
+					display     : inline-block;
+					margin      : 5px auto;
+				}
+
+				#control_button #create_new_button {
+					width       : 140px;
+					height      : 40px;
+					font-weight : bold;
+					font-size   : 14px;
+					border      : 1px solid;
+				}
+
+				#create_new_button : hover {
+					background-color : green;
+				}
+
+	    	</style>
+	    </head>
+	    <body>
+    	    <!-- REQUIRED SLDS WRAPPER -->
+			<div class="slds-scope">
+				<input type="hidden" value="{!ip}" id="ip_address" />
+				<div class="slds-grid slds-wrap slds-grid_pull-padded" id="header">
+					<div id="logo" class="slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_2-of-6">
+						<img src="{!URLFOR($Resource.Mulodo, 'mulodo.jpg')}" alt="logo" />
+					</div>
+					<div class="slds-text-heading_large slds-text-align_center slds-p-horizontal_small slds-size_1-of-1 slds-medium-size_4-of-6" id="brand">
+						CANDIDATE CONTROL
+					</div>
+				</div>
+				<div id="content" ng-app="candidateSPA" ng-controller="candidateController" ng-init="init();">
+					<div id="info" class="slds-text-align_center">
+						<span>Tổng số record: {{total}}</span>
+						<span>Date/Time: {{date | date:'hh:mm:ss dd/MM/yyyy'}}</span>
+						<span>Tên công ty: Mulodo VN</span>
+						<span>Tên nhân viên: {!$User.FirstName + ' ' + $User.LastName}</span>
+					</div>
+				</div>
+				<div id="control_button">
+					<button id="create_new_button" class="slds-button slds-button_neutral">Tạo mới</button>
+				</div>
+				<div id="weather_info">
+
+				</div>
+			</div>
+			<script type="text/javascript">
+				let app = angular.module( 'candidateSPA', [] );
+				app.controller( 'candidateController', function( $scope, $interval, $http ) {
+					let tick = function() {
+	            		$scope.date = Date.now();
+					};
+
+					let test = function () {
+						Visualforce.remoting.Manager.invokeAction (
+				            '{!$RemoteAction.SPA_CandidateController.getCurrentCountry}',
+				            function ( result, event ) {
+				            	console.log( result );
+				            },
+				            { escape : false }
+				        );
+					};
+
+					$scope.init = function () {
+						test();
+						// Clock
+						tick();
+						$interval( tick, 1000 );
+						// End clock
+						Visualforce.remoting.Manager.invokeAction (
+				            '{!$RemoteAction.SPA_CandidateController.getCount}',
+				            function ( result, event ) {
+				            	$scope.total = 0;
+				            	if ( event.status ) {
+					            	$scope.$apply( function() {
+					            		$scope.total = result;
+					            	});
+				            	}
+				            },
+				            { escape : false }
+				        );
+					};
+				});
+			</script>
+	    </body>
+    </html>
+</apex:page>
