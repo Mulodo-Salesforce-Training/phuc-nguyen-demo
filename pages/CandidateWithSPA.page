@@ -56,6 +56,22 @@
 					background-color : green;
 				}
 
+				#weather_info {
+					max-width : 60%;
+					margin    : auto;
+					color     : red;
+				}
+
+				#weather_info h2 {
+					color       : blue;
+					font-weight : bold;
+					font-style  : italic;
+				}
+
+				#weather_info span {
+					font-size : 20px; !important
+				}
+
 	    	</style>
 	    </head>
 	    <body>
@@ -77,12 +93,13 @@
 						<span>Tên công ty: Mulodo VN</span>
 						<span>Tên nhân viên: {!$User.FirstName + ' ' + $User.LastName}</span>
 					</div>
-				</div>
-				<div id="control_button">
-					<button id="create_new_button" class="slds-button slds-button_neutral">Tạo mới</button>
-				</div>
-				<div id="weather_info">
-
+					<div id="weather_info">
+						<h2>Weather Info:</h2>
+						<marquee behavior="" direction=""><span>Location: {{location}} || Lon: {{lon}} - Lat: {{lat}} || Nhiệt độ: {{temp / 10}}</span></marquee>
+					</div>
+					<div id="control_button">
+						<button id="create_new_button" class="slds-button slds-button_neutral">Tạo mới</button>
+					</div>
 				</div>
 			</div>
 			<script type="text/javascript">
@@ -93,20 +110,26 @@
 	            		$scope.date = Date.now();
 					};
 
-					let test = function () {
+					let weather = function () {
 						Visualforce.remoting.Manager.invokeAction (
-				            '{!$RemoteAction.SPA_CandidateController.getCurrentCountry}',
+				            '{!$RemoteAction.SPA_CandidateController.getWeather}',
 				            client_ip
 				            ,
 				            function ( result, event ) {
-				            	console.log( result );
+				            	let resultJson      = JSON.parse( result );
+				            	$scope.$apply( function() {
+					            	$scope.location = resultJson.name;
+					            	$scope.lon      = resultJson.coord.lon;
+					            	$scope.lat      = resultJson.coord.lat;
+					            	$scope.temp     = resultJson.main.temp;
+				            	});
 				            },
 				            { escape : false }
 				        );
 					};
 
 					$scope.init = function () {
-						test();
+						weather();
 						// Clock
 						tick();
 						$interval( tick, 1000 );
