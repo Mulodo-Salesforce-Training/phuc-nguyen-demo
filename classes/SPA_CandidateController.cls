@@ -5,8 +5,26 @@ public class SPA_CandidateController {
 	}
 
 	@RemoteAction
+	public static Boolean remove ( Id id ) {
+		Candidate__c c = [SELECT Id, First_Name__c, Last_Name__c, Phone__c, Email__c FROM Candidate__c WHERE Id =: id];
+		try {
+			delete c;
+			return true;
+		}
+		catch ( DmlException e ) {
+			return false;
+		}
+	}
+
+	@RemoteAction
+	public static Candidate__c getById ( Id id ) {
+		Candidate__c c = [SELECT Id, First_Name__c, Last_Name__c, Phone__c, Email__c FROM Candidate__c WHERE Id =: id];
+		return c;
+	}
+
+	@RemoteAction
 	public static List< Candidate__c > getList () {
-		List< Candidate__c > lc = [SELECT First_Name__c, Last_Name__c, Phone__c, Email__c FROM Candidate__c];
+		List< Candidate__c > lc = [SELECT Id, First_Name__c, Last_Name__c, Phone__c, Email__c FROM Candidate__c];
 		return lc;
 	}
 

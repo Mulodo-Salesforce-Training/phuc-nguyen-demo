@@ -8,107 +8,7 @@
 	        <title>SPA Candidate</title>
 	        <!-- Import the Design System style sheet -->
 	        <apex:slds />
-	        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js" />
-	        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-route.js" />
-	    	<style>
-				* {
-					font-size   : 14px;
-				}
-
-				body {
-					margin      : 0px auto;
-					max-width   : 1000px;
-					padding     : 0px;
-				}
-
-				#logo img {
-					max-width : 150px;
-					height    : auto;
-				}
-
-				#brand {
-					margin      : auto auto;
-					color       : red;
-					font-size   : 35px;
-					font-style  : italic;
-				}
-
-				#header {
-					max-height : 150xp;
-				}
-
-				#info span {
-					font-weight : bold;
-					padding     : 5px;
-					border      : 1px solid black;
-					display     : inline-block;
-					margin      : 5px auto;
-				}
-
-				#control_button #create_new_button, #list_button {
-					width       : 140px;
-					height      : 40px;
-					font-weight : bold;
-					font-size   : 14px;
-					border      : 1px solid;
-				}
-
-				#create_new_button, #list_button : hover {
-					background-color : green;
-				}
-
-				#weather_info {
-					max-width : 60%;
-					margin    : auto;
-					color     : red;
-				}
-
-				#weather_info h2 {
-					color       : blue;
-					font-weight : bold;
-					font-style  : italic;
-				}
-
-				#weather_info span {
-					font-size : 20px; !important
-				}
-
-				#table {
-					margin-top : 15px;
-				}
-
-				#table label {
-					margin       : 10px auto;
-					font-size    : 30px;
-					padding-left : 15px;
-					color        : #56BCFF;
-				}
-
-				/* Paste this css to your style sheet file or under head tag */
-				/* This only works with JavaScript,
-				if it's not present, don't show loader */
-				.no-js #loader { display: none;  }
-				.js #loader { display: block; position: absolute; left: 100px; top: 0; }
-				.se-pre-con {
-				    position   : fixed;
-				    left       : 0px;
-				    top        : 0px;
-				    width      : 100%;
-				    height     : 100%;
-				    z-index    : 9999;
-				    background : rgba(48, 52, 61, 0.8);
-				}
-
-				.se-pre-con img {
-					position   : fixed;
-				    left       : calc( 50% - 30px );
-				    top        : calc( 50% - 30px );
-				    width      : 30px;
-				    height     : 30px;
-				    z-index    : 9999;
-				}
-
-	    	</style>
+	        <apex:stylesheet value="{!URLFOR($Resource.Style)}" />
 	    </head>
 	    <body>
 	    	<!-- Show icon waiting for loading -->
@@ -135,92 +35,19 @@
 					</div>
 					<div id="weather_info">
 						<h2>Weather Info:</h2>
-						<marquee behavior="" direction=""><span>Location: {{location}} || Lon: {{lon}} - Lat: {{lat}} || Nhiệt độ: {{temp / 10}}</span></marquee>
+						<marquee behavior="" direction=""><span>Location: {{location}} || Lon: {{lon}} - Lat: {{lat}} || Nhiệt độ: {{temp}}</span></marquee>
 					</div>
 					<div id="control_button">
 						<button id="list_button" class="slds-button slds-button_neutral"><a href="#!">Danh sách</a></button>
-						<button id="create_new_button" class="slds-button slds-button_neutral"><a href="#!/candidate/123">Tạo mới</a></button>
+						<button id="create_new_button" class="slds-button slds-button_neutral"><a href="">Tạo mới</a></button>
 					</div>
 					<div class="ng-view"></div>
 				</div>
 			</div>
-			<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-			<script type="text/javascript">
-				$jQuery = jQuery.noConflict();
-				$jQuery(window).on( 'load', function () {
-					$jQuery(".se-pre-con").fadeOut('slow');
-			        $jQuery(".se-pre-con img").fadeOut('slow');
-			    });
-				let client_ip = document.getElementById('ip_address').value;
-				let app       = angular.module( 'candidateSPA', ["ngRoute"] );
-				app.config( function( $routeProvider ) {
-				    $routeProvider
-				    .when("/candidate/:id", {
-				    	templateUrl : "{!URLFOR($Resource.Page, 'detail.html')}",
-				        controller  : "candidateList"
-				    })
-				    .when("/", {
-				        templateUrl : "{!URLFOR($Resource.Page, 'list.html')}",
-				        controller : "candidateList"
-				    })
-				});
-				app.controller( 'candidateList', function( $scope ) {
-					$scope.init = function () {
-						Visualforce.remoting.Manager.invokeAction (
-				            '{!$RemoteAction.SPA_CandidateController.getList}',
-				            function ( result, event ) {
-				            	$scope.$apply( function() {
-					            	$scope.data = result;
-				            	});
-				            },
-				            { escape : false }
-				        );
-					}
-				});
-				app.controller( 'candidateController', function( $scope, $interval, $http ) {
-					let tick = function() {
-	            		$scope.date = Date.now();
-					};
-
-					let weather = function () {
-						Visualforce.remoting.Manager.invokeAction (
-				            '{!$RemoteAction.SPA_CandidateController.getWeather}',
-				            client_ip
-				            ,
-				            function ( result, event ) {
-				            	let resultJson      = JSON.parse( result );
-				            	$scope.$apply( function() {
-					            	$scope.location = resultJson.name;
-					            	$scope.lon      = resultJson.coord.lon;
-					            	$scope.lat      = resultJson.coord.lat;
-					            	$scope.temp     = resultJson.main.temp;
-				            	});
-				            },
-				            { escape : false }
-				        );
-					};
-
-					$scope.init = function () {
-						weather();
-						// Clock
-						tick();
-						$interval( tick, 1000 );
-						// End clock
-						Visualforce.remoting.Manager.invokeAction (
-				            '{!$RemoteAction.SPA_CandidateController.getCount}',
-				            function ( result, event ) {
-				            	$scope.total = 0;
-				            	if ( event.status ) {
-					            	$scope.$apply( function() {
-					            		$scope.total = result;
-					            	});
-				            	}
-				            },
-				            { escape : false }
-				        );
-					};
-				});
-			</script>
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular.min.js" />
+	        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-route.js" />
+	        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" />
+			<script type="text/javascript" src="{!URLFOR($Resource.SPAfunction)}" />
 	    </body>
     </html>
 </apex:page>
