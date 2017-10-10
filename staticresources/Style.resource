@@ -97,13 +97,23 @@
 	}
 
 	#info_detail {
-		margin: 15px;
-		padding-left: 20px;
+		margin       : 15px;
+		padding-left : 20px;
 	}
 
 	#info_detail h2 {
-		font-size: 20px;
-		margin-bottom: 10px;
+		font-size     : 20px;
+		margin-bottom : 10px;
+	}
+
+	#pagination {
+		margin : 20px auto;
+	}
+
+	#pagination li {
+		display    : inline-block;
+		min-width  : 50px;
+		text-align : center;
 	}
 
 </style>

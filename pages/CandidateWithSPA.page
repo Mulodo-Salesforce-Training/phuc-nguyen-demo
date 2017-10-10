@@ -38,8 +38,16 @@
 						<marquee behavior="" direction=""><span>Location: {{location}} || Lon: {{lon}} - Lat: {{lat}} || Nhiệt độ: {{temp}}</span></marquee>
 					</div>
 					<div id="control_button">
-						<button id="list_button" class="slds-button slds-button_neutral"><a href="#!">Danh sách</a></button>
-						<button id="create_new_button" class="slds-button slds-button_neutral"><a href="">Tạo mới</a></button>
+						<a href="#!">
+							<button id="list_button" class="slds-button slds-button_neutral">
+								Danh sách
+							</button>
+						</a>
+						<a href="">
+							<button id="create_new_button" class="slds-button slds-button_neutral">
+								Tạo mới
+							</button>
+						</a>
 					</div>
 					<div class="ng-view"></div>
 				</div>
