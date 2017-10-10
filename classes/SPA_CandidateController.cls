@@ -3,6 +3,13 @@ public class SPA_CandidateController {
 	public SPA_CandidateController() {
 		ip = ApexPages.currentPage().getHeaders().get('X-Salesforce-SIP');
 	}
+
+	@RemoteAction
+	public static List< Candidate__c > getList () {
+		List< Candidate__c > lc = [SELECT First_Name__c, Last_Name__c, Phone__c, Email__c FROM Candidate__c];
+		return lc;
+	}
+
 	@RemoteAction
 	public static Integer getCount () {
 		Integer countTotal = [SELECT count() FROM Candidate__c];

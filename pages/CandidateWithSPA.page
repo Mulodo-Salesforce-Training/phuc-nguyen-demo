@@ -72,6 +72,17 @@
 					font-size : 20px; !important
 				}
 
+				#table {
+					margin-top : 15px;
+				}
+
+				#table label {
+					margin       : 10px auto;
+					font-size    : 30px;
+					padding-left : 15px;
+					color        : #56BCFF;
+				}
+
 	    	</style>
 	    </head>
 	    <body>
@@ -100,11 +111,55 @@
 					<div id="control_button">
 						<button id="create_new_button" class="slds-button slds-button_neutral">Tạo mới</button>
 					</div>
+					<div id="table">
+						<label for="">| CANDIDATE LIST |</label>
+						<table id="candidate_data" class="slds-table slds-table_bordered slds-table_cell-buffer slds-no-row-hover">
+							<thead>
+    							<tr class="slds-text-title_caps">
+    								<th scope="col">
+								    	<div class="slds-truncate" title="Candidate Name">{!$Label.Candidate_Name}</div>
+								    </th>
+								    <th scope="col">
+								    	<div class="slds-truncate" title="Candidate Phone">{!$Label.Candidate_Phone}</div>
+								    </th>
+								    <th scope="col">
+								    	<div class="slds-truncate" title="Candidate Email">{!$Label.Candidate_Email}</div>
+								    </th>
+								</tr>
+  							</thead>
+  							<tbody ng-controller="candidateList" ng-init="init();">
+  								<tr ng-repeat="candidate in data">
+  									<td data-label="Name">
+		                                <div class="slds-truncate" title="Name">{{candidate.First_Name__c + ' ' + candidate.Last_Name__c}}</div>
+		                            </td>
+		                            <td data-label="Phone">
+		                                <div class="slds-truncate" title="Phone">{{candidate.Phone__c}}</div>
+		                            </td>
+		                            <td data-label="Email">
+		                                <div class="slds-truncate" title="Email">{{candidate.Email__c}}</div>
+		                            </td>
+  								</tr>
+  							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 			<script type="text/javascript">
 				let client_ip = document.getElementById('ip_address').value;
 				let app       = angular.module( 'candidateSPA', [] );
+				app.controller( 'candidateList', function( $scope ) {
+					$scope.init = function () {
+						Visualforce.remoting.Manager.invokeAction (
+				            '{!$RemoteAction.SPA_CandidateController.getList}',
+				            function ( result, event ) {
+				            	$scope.$apply( function() {
+					            	$scope.data = result;
+				            	});
+				            },
+				            { escape : false }
+				        );
+					}
+				});
 				app.controller( 'candidateController', function( $scope, $interval, $http ) {
 					let tick = function() {
 	            		$scope.date = Date.now();
