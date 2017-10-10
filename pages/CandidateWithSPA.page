@@ -138,8 +138,8 @@
 						<marquee behavior="" direction=""><span>Location: {{location}} || Lon: {{lon}} - Lat: {{lat}} || Nhiệt độ: {{temp / 10}}</span></marquee>
 					</div>
 					<div id="control_button">
-						<button id="list_button" class="slds-button slds-button_neutral"><a href="#"></a>Danh sách</button>
-						<button id="create_new_button" class="slds-button slds-button_neutral">Tạo mới</button>
+						<button id="list_button" class="slds-button slds-button_neutral"><a href="#!">Danh sách</a></button>
+						<button id="create_new_button" class="slds-button slds-button_neutral"><a href="#!/candidate/123">Tạo mới</a></button>
 					</div>
 					<div class="ng-view"></div>
 				</div>
@@ -155,6 +155,10 @@
 				let app       = angular.module( 'candidateSPA', ["ngRoute"] );
 				app.config( function( $routeProvider ) {
 				    $routeProvider
+				    .when("/candidate/:id", {
+				    	templateUrl : "{!URLFOR($Resource.Page, 'detail.html')}",
+				        controller  : "candidateList"
+				    })
 				    .when("/", {
 				        templateUrl : "{!URLFOR($Resource.Page, 'list.html')}",
 				        controller : "candidateList"
