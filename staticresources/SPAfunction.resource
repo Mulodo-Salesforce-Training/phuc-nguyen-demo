@@ -198,21 +198,22 @@
     	};
 
     	let weather = function () {
-    		Visualforce.remoting.Manager.invokeAction (
-                'SPA_CandidateController.getWeather',
-                client_ip
-                ,
-                function ( result, event ) {
-                	let resultJson      = JSON.parse( result );
-                	$scope.$apply( function() {
-    	            	$scope.location = resultJson.name;
-    	            	$scope.lon      = resultJson.coord.lon;
-    	            	$scope.lat      = resultJson.coord.lat;
-    	            	$scope.temp     = number_format( resultJson.main.temp / 10, 0, '.', ' ' );
-                	});
-                },
-                { escape : false }
-            );
+    		$interval(
+                Visualforce.remoting.Manager.invokeAction (
+                    'SPA_CandidateController.getWeather',
+                    client_ip
+                    ,
+                    function ( result, event ) {
+                    	let resultJson      = JSON.parse( result );
+                    	$scope.$apply( function() {
+        	            	$scope.location = resultJson.name;
+        	            	$scope.lon      = resultJson.coord.lon;
+        	            	$scope.lat      = resultJson.coord.lat;
+        	            	$scope.temp     = number_format( resultJson.main.temp / 10, 0, '.', ' ' );
+                    	});
+                    },
+                    { escape : false }
+                ), 1000 );
     	};
 
         let count = function () {
